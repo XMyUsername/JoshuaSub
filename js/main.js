@@ -101,7 +101,7 @@ function openEpisodeModal(episodeId) {
         </div>
         <div class="modal-body">
             <div class="video-container">
-                <iframe src="${episode.url}" frameborder="0" allowfullscreen></iframe>
+                <iframe id="videoFrame" src="${episode.url}?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
             </div>
             <div class="video-info">
                 <h2 class="video-title">${episode.titulo}</h2>
@@ -146,6 +146,22 @@ function openEpisodeModal(episodeId) {
 
 function closeModal() {
     const modal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    
+    // 🔥 SOLUCIÓN: Detener completamente el video
+    if (videoFrame) {
+        // Método 1: Eliminar completamente el src
+        videoFrame.src = 'about:blank';
+        
+        // Método 2: Como respaldo, también remover el iframe
+        setTimeout(() => {
+            const videoContainer = videoFrame.parentElement;
+            if (videoContainer) {
+                videoContainer.innerHTML = '<div style="height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Video detenido</div>';
+            }
+        }, 100);
+    }
+    
     modal.style.display = 'none';
     
     // Restaurar scroll del body
@@ -190,6 +206,33 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();
+    }
+});
+
+// 🔥 NUEVA FUNCIÓN: Detener video si el usuario navega o recarga
+window.addEventListener('beforeunload', function() {
+    const videoFrame = document.getElementById('videoFrame');
+    if (videoFrame) {
+        videoFrame.src = 'about:blank';
+    }
+});
+
+// 🔥 NUEVA FUNCIÓN: Detener video si se pierde el foco de la página
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        const modal = document.getElementById('videoModal');
+        if (modal && modal.style.display === 'block') {
+            // Pausar el video cuando la página no está visible
+            const videoFrame = document.getElementById('videoFrame');
+            if (videoFrame && videoFrame.src !== 'about:blank') {
+                // Enviar mensaje de pausa al iframe (funciona con algunos reproductores)
+                try {
+                    videoFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                } catch (e) {
+                    // Si no funciona, no pasa nada
+                }
+            }
+        }
     }
 });
 
