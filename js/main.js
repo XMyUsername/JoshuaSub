@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeHomePage();
-    setupMobileNavigation();
+    setupBottomNavigation(); // Nueva función
     initializeRefreshSystem();
 });
 
@@ -135,6 +135,7 @@ function openEpisodeModal(episodeId) {
     `;
     
     modal.style.display = 'block';
+    document.body.classList.add('modal-open');
     
     // Incrementar contador de vistas
     incrementViews(episodeId);
@@ -150,12 +151,10 @@ function closeModal() {
     const modal = document.getElementById('videoModal');
     const videoFrame = document.getElementById('videoFrame');
     
-    // 🔥 SOLUCIÓN: Detener completamente el video
+    // Detener completamente el video
     if (videoFrame) {
-        // Método 1: Eliminar completamente el src
         videoFrame.src = 'about:blank';
         
-        // Método 2: Como respaldo, también remover el iframe
         setTimeout(() => {
             const videoContainer = videoFrame.parentElement;
             if (videoContainer) {
@@ -165,6 +164,7 @@ function closeModal() {
     }
     
     modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
     
     // Restaurar scroll del body
     document.body.style.overflow = 'auto';
@@ -176,84 +176,44 @@ function closeModal() {
     }, 500);
 }
 
-function setupMobileNavigation() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const body = document.body;
+// ========================================
+// 📱 NUEVA NAVEGACIÓN BOTTOM
+// ========================================
+
+function setupBottomNavigation() {
+    const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    if (hamburger && navMenu) {
-        // Click en hamburger
-        hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('🍔 Hamburger clicked'); // Para debug
-            
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // Prevenir scroll cuando el menú está abierto
-            if (navMenu.classList.contains('active')) {
-                body.style.overflow = 'hidden';
-                body.style.position = 'fixed';
-                body.style.width = '100%';
-            } else {
-                body.style.overflow = '';
-                body.style.position = '';
-                body.style.width = '';
-            }
+    // Establecer página activa
+    bottomNavItems.forEach(item => {
+        item.classList.remove('active');
+        const href = item.getAttribute('href');
+        
+        if (href === currentPage || 
+            (currentPage === '' && href === 'index.html') ||
+            (currentPage === 'index.html' && href === 'index.html')) {
+            item.classList.add('active');
+        }
+    });
+    
+    // Agregar efectos de tap
+    bottomNavItems.forEach(item => {
+        item.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
         });
         
-        // Cerrar menú al hacer click en un enlace
-        document.querySelectorAll('.nav-link, .refresh-btn').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                body.style.overflow = '';
-                body.style.position = '';
-                body.style.width = '';
-            });
-        });
-        
-        // Cerrar menú al hacer click fuera (solo en el overlay)
-        navMenu.addEventListener('click', function(e) {
-            if (e.target === navMenu) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                body.style.overflow = '';
-                body.style.position = '';
-                body.style.width = '';
-            }
-        });
-        
-        // Cerrar con tecla Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                body.style.overflow = '';
-                body.style.position = '';
-                body.style.width = '';
-            }
-        });
-        
-        // Manejar cambio de orientación
-        window.addEventListener('orientationchange', function() {
+        item.addEventListener('touchend', function() {
             setTimeout(() => {
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    body.style.overflow = '';
-                    body.style.position = '';
-                    body.style.width = '';
-                }
-            }, 100);
+                this.style.transform = '';
+            }, 150);
         });
-    }
+    });
+    
+    console.log('📱 Bottom Navigation inicializada');
 }
 
 // ========================================
-// 🔄 FUNCIONES DE ACTUALIZACIÓN MEJORADAS
+// 🔄 FUNCIONES DE ACTUALIZACIÓN
 // ========================================
 
 function initializeRefreshSystem() {
@@ -261,10 +221,9 @@ function initializeRefreshSystem() {
     console.log('✅ Sistema de actualización inicializado');
 }
 
-// 🔄 Función para hacer hard refresh como CTRL+F5
 function hardRefresh() {
     return new Promise((resolve) => {
-        // Método 1: Limpiar Service Workers
+        // Limpiar Service Workers
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for(let registration of registrations) {
@@ -273,7 +232,7 @@ function hardRefresh() {
             });
         }
         
-        // Método 2: Limpiar caché del navegador
+        // Limpiar caché del navegador
         if ('caches' in window) {
             caches.keys().then(function(names) {
                 for (let name of names) {
@@ -282,11 +241,10 @@ function hardRefresh() {
             });
         }
         
-        // Método 3: Agregar timestamp para evitar caché
+        // Agregar timestamp para evitar caché
         const url = new URL(window.location);
         url.searchParams.set('_refresh', Date.now());
         
-        // Método 4: Usar location.replace con parámetros anti-caché
         setTimeout(() => {
             window.location.replace(url.toString());
         }, 500);
@@ -295,7 +253,6 @@ function hardRefresh() {
     });
 }
 
-// 🔄 Refrescar página completa (navbar) - CTRL+F5 style
 function refreshPage() {
     const button = event.target.closest('.refresh-btn');
     if (button) {
@@ -308,28 +265,24 @@ function refreshPage() {
     
     showToast('🔄 Actualizando página completa...', 'info');
     
-    // Hard refresh después de mostrar el mensaje
     setTimeout(() => {
         hardRefresh();
     }, 1000);
 }
 
-// 🎯 Refrescar inteligente (hero button) - CTRL+F5 style
 function smartRefresh() {
-    const button = event.target.closest('.hero-refresh-btn');
+    const button = event.target.closest('.hero-refresh-btn, .refresh-nav-btn');
     if (button) {
         button.classList.add('loading');
     }
     
     showToast('🔍 Buscando nuevos episodios...', 'info');
     
-    // Hard refresh para obtener la versión más reciente
     setTimeout(() => {
         hardRefresh();
     }, 2000);
 }
 
-// ⚡ Refrescar sección específica - CTRL+F5 style
 function refreshSection(sectionType) {
     const button = event.target.closest('.section-refresh-btn');
     if (button) {
@@ -342,22 +295,18 @@ function refreshSection(sectionType) {
     
     showToast(`🔄 Actualizando ${sectionType === 'featured' ? 'destacados' : 'nuevos episodios'}...`, 'info');
     
-    // Para secciones también hacemos hard refresh
     setTimeout(() => {
         hardRefresh();
     }, 1500);
 }
 
-// 💪 Forzar actualización completa - MEGA CTRL+F5
 function forceRefresh() {
     showGlobalLoader();
     showToast('💪 Forzando actualización completa...', 'info');
     
-    // Limpiar TODO el almacenamiento local
     localStorage.clear();
     sessionStorage.clear();
     
-    // Limpiar cookies (si es posible)
     document.cookie.split(";").forEach(function(c) { 
         document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
     });
@@ -367,7 +316,6 @@ function forceRefresh() {
     }, 2000);
 }
 
-// 🕒 Actualizar tiempo de última actualización
 function updateLastUpdateTime() {
     const lastUpdateElement = document.getElementById('lastUpdate');
     if (lastUpdateElement) {
@@ -384,9 +332,7 @@ function updateLastUpdateTime() {
     }
 }
 
-// 🔔 Mostrar notificación toast mejorada
 function showToast(message, type = 'info') {
-    // Remover toast anterior si existe
     const existingToast = document.querySelector('.refresh-toast');
     if (existingToast) {
         document.body.removeChild(existingToast);
@@ -408,12 +354,10 @@ function showToast(message, type = 'info') {
     
     document.body.appendChild(toast);
     
-    // Mostrar toast
     setTimeout(() => {
         toast.classList.add('show');
     }, 100);
     
-    // Barra de progreso
     const progressBar = toast.querySelector('.toast-progress');
     if (progressBar) {
         progressBar.style.width = '100%';
@@ -423,7 +367,6 @@ function showToast(message, type = 'info') {
         }, 100);
     }
     
-    // Ocultar después de 3 segundos
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => {
@@ -434,7 +377,6 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-// 🌀 Mostrar loader global mejorado
 function showGlobalLoader() {
     const loader = document.createElement('div');
     loader.id = 'globalLoader';
@@ -451,7 +393,6 @@ function showGlobalLoader() {
     
     document.body.appendChild(loader);
     
-    // Animar barra de progreso
     const progressBar = loader.querySelector('.loader-progress-bar');
     if (progressBar) {
         setTimeout(() => {
@@ -460,7 +401,6 @@ function showGlobalLoader() {
     }
 }
 
-// 📱 Cerrar notificación
 function closeNotification() {
     const notification = document.getElementById('updateNotification');
     if (notification) {
@@ -479,15 +419,6 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();
-        
-        // También cerrar menú móvil si está abierto
-        const navMenu = document.querySelector('.nav-menu');
-        const hamburger = document.querySelector('.hamburger');
-        if (navMenu && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
     }
 });
 
