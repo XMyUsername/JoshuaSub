@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     initializeHomePage();
     setupMobileNavigation();
+    initializeRefreshSystem();
 });
 
 function initializeHomePage() {
@@ -82,6 +83,7 @@ function createEpisodeCard(episode) {
 function updateCounters() {
     updateEpisodeCount();
     updateTotalViews();
+    updateLastUpdateTime();
 }
 
 function openEpisodeModal(episodeId) {
@@ -180,21 +182,254 @@ function setupMobileNavigation() {
     
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            // Prevenir scroll cuando el menú está abierto
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         });
         
         // Cerrar menú al hacer click en un enlace
-        document.querySelectorAll('.nav-link').forEach(link => {
+        document.querySelectorAll('.nav-link, .refresh-btn').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
+        });
+        
+        // Cerrar menú al hacer click fuera
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
     }
 }
 
-// Cerrar modal al hacer click fuera de él
+// ========================================
+// 🔄 FUNCIONES DE ACTUALIZACIÓN MEJORADAS
+// ========================================
+
+function initializeRefreshSystem() {
+    updateLastUpdateTime();
+    console.log('✅ Sistema de actualización inicializado');
+}
+
+// 🔄 Función para hacer hard refresh como CTRL+F5
+function hardRefresh() {
+    return new Promise((resolve) => {
+        // Método 1: Limpiar Service Workers
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
+        
+        // Método 2: Limpiar caché del navegador
+        if ('caches' in window) {
+            caches.keys().then(function(names) {
+                for (let name of names) {
+                    caches.delete(name);
+                }
+            });
+        }
+        
+        // Método 3: Agregar timestamp para evitar caché
+        const url = new URL(window.location);
+        url.searchParams.set('_refresh', Date.now());
+        
+        // Método 4: Usar location.replace con parámetros anti-caché
+        setTimeout(() => {
+            window.location.replace(url.toString());
+        }, 500);
+        
+        resolve();
+    });
+}
+
+// 🔄 Refrescar página completa (navbar) - CTRL+F5 style
+function refreshPage() {
+    const button = event.target.closest('.refresh-btn');
+    if (button) {
+        button.classList.add('loading');
+        const icon = button.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'spin 1s linear infinite';
+        }
+    }
+    
+    showToast('🔄 Actualizando página completa...', 'info');
+    
+    // Hard refresh después de mostrar el mensaje
+    setTimeout(() => {
+        hardRefresh();
+    }, 1000);
+}
+
+// 🎯 Refrescar inteligente (hero button) - CTRL+F5 style
+function smartRefresh() {
+    const button = event.target.closest('.hero-refresh-btn');
+    if (button) {
+        button.classList.add('loading');
+    }
+    
+    showToast('🔍 Buscando nuevos episodios...', 'info');
+    
+    // Hard refresh para obtener la versión más reciente
+    setTimeout(() => {
+        hardRefresh();
+    }, 2000);
+}
+
+// ⚡ Refrescar sección específica - CTRL+F5 style
+function refreshSection(sectionType) {
+    const button = event.target.closest('.section-refresh-btn');
+    if (button) {
+        button.classList.add('loading');
+        const icon = button.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'spin 1s linear infinite';
+        }
+    }
+    
+    showToast(`🔄 Actualizando ${sectionType === 'featured' ? 'destacados' : 'nuevos episodios'}...`, 'info');
+    
+    // Para secciones también hacemos hard refresh
+    setTimeout(() => {
+        hardRefresh();
+    }, 1500);
+}
+
+// 💪 Forzar actualización completa - MEGA CTRL+F5
+function forceRefresh() {
+    showGlobalLoader();
+    showToast('💪 Forzando actualización completa...', 'info');
+    
+    // Limpiar TODO el almacenamiento local
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Limpiar cookies (si es posible)
+    document.cookie.split(";").forEach(function(c) { 
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+    });
+    
+    setTimeout(() => {
+        hardRefresh();
+    }, 2000);
+}
+
+// 🕒 Actualizar tiempo de última actualización
+function updateLastUpdateTime() {
+    const lastUpdateElement = document.getElementById('lastUpdate');
+    if (lastUpdateElement) {
+        const now = new Date();
+        const timeString = now.toLocaleString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        lastUpdateElement.textContent = timeString;
+        localStorage.setItem('lastUpdateTime', now.getTime().toString());
+    }
+}
+
+// 🔔 Mostrar notificación toast mejorada
+function showToast(message, type = 'info') {
+    // Remover toast anterior si existe
+    const existingToast = document.querySelector('.refresh-toast');
+    if (existingToast) {
+        document.body.removeChild(existingToast);
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = `refresh-toast ${type}`;
+    
+    let icon = '🔄';
+    if (type === 'success') icon = '✅';
+    if (type === 'error') icon = '❌';
+    if (type === 'info') icon = 'ℹ️';
+    
+    toast.innerHTML = `
+        <span class="toast-icon">${icon}</span>
+        <span class="toast-message">${message}</span>
+        <div class="toast-progress"></div>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Mostrar toast
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Barra de progreso
+    const progressBar = toast.querySelector('.toast-progress');
+    if (progressBar) {
+        progressBar.style.width = '100%';
+        progressBar.style.transition = 'width 3s linear';
+        setTimeout(() => {
+            progressBar.style.width = '0%';
+        }, 100);
+    }
+    
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// 🌀 Mostrar loader global mejorado
+function showGlobalLoader() {
+    const loader = document.createElement('div');
+    loader.id = 'globalLoader';
+    loader.innerHTML = `
+        <div class="global-loader-content">
+            <div class="loader-spinner"></div>
+            <p>🔄 Actualizando episodios...</p>
+            <small>Esto puede tardar unos segundos</small>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(loader);
+    
+    // Animar barra de progreso
+    const progressBar = loader.querySelector('.loader-progress-bar');
+    if (progressBar) {
+        setTimeout(() => {
+            progressBar.style.width = '100%';
+        }, 100);
+    }
+}
+
+// 📱 Cerrar notificación
+function closeNotification() {
+    const notification = document.getElementById('updateNotification');
+    if (notification) {
+        notification.classList.add('hidden');
+    }
+}
+
+// Event listeners
 window.addEventListener('click', function(event) {
     const modal = document.getElementById('videoModal');
     if (event.target === modal) {
@@ -202,14 +437,21 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Cerrar modal con tecla Escape
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();
+        
+        // También cerrar menú móvil si está abierto
+        const navMenu = document.querySelector('.nav-menu');
+        const hamburger = document.querySelector('.hamburger');
+        if (navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     }
 });
 
-// 🔥 NUEVA FUNCIÓN: Detener video si el usuario navega o recarga
 window.addEventListener('beforeunload', function() {
     const videoFrame = document.getElementById('videoFrame');
     if (videoFrame) {
@@ -217,26 +459,7 @@ window.addEventListener('beforeunload', function() {
     }
 });
 
-// 🔥 NUEVA FUNCIÓN: Detener video si se pierde el foco de la página
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        const modal = document.getElementById('videoModal');
-        if (modal && modal.style.display === 'block') {
-            // Pausar el video cuando la página no está visible
-            const videoFrame = document.getElementById('videoFrame');
-            if (videoFrame && videoFrame.src !== 'about:blank') {
-                // Enviar mensaje de pausa al iframe (funciona con algunos reproductores)
-                try {
-                    videoFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                } catch (e) {
-                    // Si no funciona, no pasa nada
-                }
-            }
-        }
-    }
-});
-
-// Animaciones suaves al hacer scroll
+// Animaciones
 window.addEventListener('scroll', function() {
     const elements = document.querySelectorAll('.episode-card');
     elements.forEach(element => {
@@ -250,7 +473,6 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// Inicializar animaciones
 document.addEventListener('DOMContentLoaded', function() {
     const elements = document.querySelectorAll('.episode-card');
     elements.forEach(element => {
