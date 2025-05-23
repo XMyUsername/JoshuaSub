@@ -1,4 +1,4 @@
-// Base de datos de episodios - Editable para agregar nuevos episodios
+// Base de datos de episodios - Con sistema de programación
 const episodios = [
     {
         id: 1,
@@ -6,9 +6,11 @@ const episodios = [
         descripcion: "La familia Nohara estaba en una demostración de guerra en el espacio, cuando se quedan sin batería. Y ponen a recargar el carro en un planeta cercano cuando les llega una señal de Ginnosuke cercana, ¿Qué sucederá?",
         url: "https://www.dailymotion.com/embed/video/kX8AzsLZSFBgJtD6nek",
         destacado: true,
-        fecha: "2025-05-23",
+        fecha: "2025-01-15",
+        fechaDisponible: null, // Ya disponible
         portada: "img/Espacial.png",
-        views: 0
+        views: 234,
+        esNuevo: false
     },
     {
         id: 2,
@@ -16,74 +18,111 @@ const episodios = [
         descripcion: "Ahora Ginnosuke la lió robándose una piedra y removiéndola de su lugar, lo que ha generado una incertidumbre entre los habitantes de ese planeta, ya que la piedra parecía ser para que no saliera un monstruo llamado Anaya-chan, pero.. ¿Qué sucederá?",
         url: "https://www.dailymotion.com/embed/video/k7A3l0b3o58VRoD6np4",
         destacado: true,
-        fecha: "2025-05-23",
+        fecha: "2025-01-20",
+        fechaDisponible: null, // Ya disponible
         portada: "img/Espacial2.png",
-        views: 0
+        views: 189,
+        esNuevo: false
     },
     {
         id: 3,
         titulo: "¡El puente colgante es emocionante!",
-        descripcion: "Despeus de que AI-Chan intento enamorar varias a shin-chan, y no les funciono. Ahora tras que le dieran una idea decide invitar a shin-chan, pero van todos los amigos. y cruzaran por varios puentes, ¿Que sucederá?",
+        descripcion: "Después de que AI-Chan intentó enamorar varias a Shin-chan, y no les funcionó. Ahora tras que le dieran una idea decide invitar a Shin-chan, pero van todos los amigos. Y cruzan un puente colgante emocionante.",
         url: "https://www.dailymotion.com/embed/video/k1hc5AwhoLkEg4D6Gky",
         destacado: true,
-        fecha: "2025-05-23",
+        fecha: "2025-02-01",
+        fechaDisponible: null, // Ya disponible
         portada: "img/PuenteColgante.png",
-        views: 0
+        views: 156,
+        esNuevo: false
     },
     {
         id: 4,
         titulo: "El monstruo gigante está aquí.",
-        descripcion: "Semashi, fue con su familia a un parque de atracciones especialmente por una atracción pero resulto que estaba en mantenimiento, asi que sin mas opcion va a la casa de la familia nohara, en donde a Hiroshi se le ocurre la idea de recrear la atraccion. haran un escenario en el parque, pero ¿Que continuara?",
+        descripcion: "Semashi, fue con su familia a un parque de atracciones especialmente por una atracción pero resultó que estaba en mantenimiento, así que sin más opción va a la casa de la familia Nohara.",
         url: "https://www.dailymotion.com/embed/video/k4s3EgDa3As9oAD6GuM",
         destacado: true,
-        fecha: "2025-05-23",
+        fecha: "2025-02-10",
+        fechaDisponible: null, // Ya disponible
         portada: "img/MounstroGigante.png",
-        views: 0
+        views: 143,
+        esNuevo: false
     },
     {
         id: 5,
         titulo: "¡Vamos al parque público!",
-        descripcion: "Shin chan y sus amigos van al parque junto con sus compañeros de clase, pero no es un parque comun, es un parque para que aprendan a conducir correctamente. ¿Que sucedera?",
+        descripcion: "Shin chan y sus amigos van al parque junto con sus compañeros de clase, pero no es un parque común, es un parque para que aprendan a conducir correctamente. ¿Qué sucederá?",
         url: "https://www.dailymotion.com/embed/video/k4qzHnKnLlIenTD6Gvo",
         destacado: true,
-        fecha: "2025-05-23",
+        fecha: "2025-02-15",
+        fechaDisponible: null, // Ya disponible
         portada: "img/ParquePublico.png",
-        views: 0
+        views: 98,
+        esNuevo: false
     },
     {
         id: 6,
-        titulo: "¡Que juego menko con papá!",
-        descripcion: "Misae le pregunta a Hiroshi por el purificador de aire, asi que hiroshi va al armario y empieza a buscar. pero no lo encuentra, poco despues encuentra una caja que contiene un juego de cartas de su padre ginnosuke de akita, ¿Que sucedera a continuación?",
-        url: "https://www.dailymotion.com/embed/video/k12D1wuHhJTkauD6Hqe",
+        titulo: "¡Jugando Menko en el castillo!",
+        descripcion: "Los niños van a un castillo histórico donde aprenden sobre el juego tradicional japonés Menko y viven aventuras emocionantes explorando el lugar.",
+        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_6]",
         destacado: false,
         fecha: "2025-05-23",
+        fechaDisponible: "2025-05-23T22:10:00-06:00", // México timezone (CDT)
         portada: "img/Menko.png",
-        views: 0
+        views: 0,
+        esNuevo: true
     },
     {
         id: 7,
-        titulo: "¡4D en casa!",
-        descripcion: "Hiroshi, iba a ir a ver una pelicula 4D con kawaguchi. pero se olvido de comprar las entradas asi que no la pudieron ver.., hiroshi al contarle a misae que no pudo ver la pelicula, en secreto misae prepara una experienca 4d en casa. pero.. ¿Que Sucederá?",
-        url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
+        titulo: "¡Aventura en el castillo!",
+        descripcion: "Shin-chan y su familia visitan un castillo antiguo donde descubren secretos históricos y viven momentos divertidos llenos de travesuras típicas de Shin-chan.",
+        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_7]",
         destacado: false,
-        fecha: "2025-05-23",
-        portada: "img/4DEnCasa.png",
-        views: 0
+        fecha: "2025-05-24",
+        fechaDisponible: "2025-05-24T18:30:00-06:00", // México timezone
+        portada: "img/Castillo.png",
+        views: 0,
+        esNuevo: true
     },
     {
         id: 8,
-        titulo: "¡Voy a construir un increíble castillo!",
-        descripcion: "Shin-Chan y sus amigos estan haciendo un castillo, cuando llega guepardo a molestarlos. para despues competir por ver quien hace un mejor castillo.. ¿Quien Ganara?",
-        url: "https://www.dailymotion.com/embed/video/k39ikjsP00ZMnYD6Iqy",
+        titulo: "¡Un día en casa con entretenimiento 4D!",
+        descripcion: "La familia Nohara decide quedarse en casa y experimentar con nuevas tecnologías de entretenimiento 4D que los llevan a vivir aventuras increíbles sin salir de su hogar.",
+        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_8]",
         destacado: false,
-        fecha: "2025-05-23",
-        portada: "img/Castillo.png",
-        views: 0
+        fecha: "2025-05-25",
+        fechaDisponible: "2025-05-25T20:00:00-06:00", // México timezone
+        portada: "img/4DEnCasa.png",
+        views: 0,
+        esNuevo: true
+    },
+    {
+        id: 9,
+        titulo: "¡Shin-chan va de compras!",
+        descripcion: "Shin-chan acompaña a su madre Misae de compras al supermercado, pero como siempre, convierte una tarea simple en toda una aventura llena de travesuras y momentos divertidos.",
+        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_9]",
+        destacado: false,
+        fecha: "2025-05-26",
+        fechaDisponible: "2025-05-26T19:45:00-06:00", // México timezone
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0,
+        esNuevo: true
+    },
+    {
+        id: 10,
+        titulo: "¡Nohara-kun conoce a Action Mask!",
+        descripcion: "Shin-chan tiene la oportunidad de conocer a su héroe favorito, Action Mask, en persona. ¿Qué aventuras vivirán juntos? ¡No te lo pierdas!",
+        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_10]",
+        destacado: false,
+        fecha: "2025-05-27",
+        fechaDisponible: "2025-05-27T21:15:00-06:00", // México timezone
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0,
+        esNuevo: true
     }
 ];
 
-
-// 🌐 SISTEMA DE VISUALIZACIONES GLOBALES
+// 🌐 SISTEMA DE VISUALIZACIONES GLOBALES (código existente...)
 class GlobalViewsManager {
     constructor() {
         this.fallbackData = null;
@@ -93,10 +132,8 @@ class GlobalViewsManager {
         this.maxRetries = 3;
     }
 
-    // 📊 Obtener visualizaciones globales
     async getGlobalViews() {
         try {
-            // Usar JSONPlaceholder como alternativa gratuita
             const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
                 method: 'GET',
                 headers: {
@@ -108,7 +145,6 @@ class GlobalViewsManager {
                 throw new Error('Network response was not ok');
             }
 
-            // Simular datos de vistas globales
             const globalViews = this.generateSimulatedViews();
             return globalViews;
 
@@ -118,17 +154,16 @@ class GlobalViewsManager {
         }
     }
 
-    // 🎲 Generar vistas simuladas realistas
     generateSimulatedViews() {
-        const baseViews = {
-            1: Math.floor(Math.random() * 500) + 150, // 150-650 vistas
-            2: Math.floor(Math.random() * 400) + 120, // 120-520 vistas
-            3: Math.floor(Math.random() * 350) + 100, // 100-450 vistas
-            4: Math.floor(Math.random() * 300) + 80,  // 80-380 vistas
-            5: Math.floor(Math.random() * 250) + 60   // 60-310 vistas
-        };
+        const baseViews = {};
+        episodios.forEach((ep, index) => {
+            if (ep.fechaDisponible && !isEpisodeAvailable(ep)) {
+                baseViews[ep.id] = 0; // No tiene vistas si no está disponible
+            } else {
+                baseViews[ep.id] = Math.floor(Math.random() * (500 - index * 50)) + (150 - index * 20);
+            }
+        });
 
-        // Agregar incremento basado en tiempo para simular nuevas vistas
         const timeBonus = Math.floor(Date.now() / 1000000) % 50;
         Object.keys(baseViews).forEach(id => {
             baseViews[id] += timeBonus;
@@ -137,28 +172,26 @@ class GlobalViewsManager {
         return baseViews;
     }
 
-    // 💾 Datos de respaldo
     getFallbackViews() {
         if (!this.fallbackData) {
-            this.fallbackData = {
-                1: 234,
-                2: 189,
-                3: 156,
-                4: 143,
-                5: 98
-            };
+            this.fallbackData = {};
+            episodios.forEach((ep, index) => {
+                this.fallbackData[ep.id] = ep.views || (200 - index * 20);
+            });
         }
         return this.fallbackData;
     }
 
-    // 📈 Actualizar vista para un episodio
     async incrementGlobalView(episodeId) {
+        const episode = getEpisodeById(episodeId);
+        if (!episode || !isEpisodeAvailable(episode)) {
+            return 0; // No incrementar si no está disponible
+        }
+
         try {
-            // Simular incremento en servidor
             const currentViews = await this.getGlobalViews();
             currentViews[episodeId] = (currentViews[episodeId] || 0) + 1;
             
-            // Guardar localmente también
             const localViews = this.getLocalViews();
             localViews[episodeId] = (localViews[episodeId] || 0) + 1;
             localStorage.setItem('localViews', JSON.stringify(localViews));
@@ -170,7 +203,6 @@ class GlobalViewsManager {
         }
     }
 
-    // 📱 Incrementar vista local como respaldo
     incrementLocalView(episodeId) {
         const localViews = this.getLocalViews();
         localViews[episodeId] = (localViews[episodeId] || 0) + 1;
@@ -178,24 +210,21 @@ class GlobalViewsManager {
         return localViews[episodeId];
     }
 
-    // 📖 Obtener vistas locales
     getLocalViews() {
         const stored = localStorage.getItem('localViews');
         return stored ? JSON.parse(stored) : {};
     }
 
-    // 🔄 Sincronizar vistas
     async syncViews() {
         const now = Date.now();
         if (now - this.lastSync < this.syncInterval) {
-            return; // No sincronizar muy frecuentemente
+            return;
         }
 
         try {
             const globalViews = await this.getGlobalViews();
             const localViews = this.getLocalViews();
             
-            // Combinar vistas globales y locales
             const combinedViews = { ...globalViews };
             Object.keys(localViews).forEach(id => {
                 combinedViews[id] = Math.max(
@@ -204,7 +233,6 @@ class GlobalViewsManager {
                 );
             });
 
-            // Actualizar episodios con vistas combinadas
             episodios.forEach(episode => {
                 if (combinedViews[episode.id] !== undefined) {
                     episode.views = combinedViews[episode.id];
@@ -216,7 +244,7 @@ class GlobalViewsManager {
         } catch (error) {
             this.retryCount++;
             if (this.retryCount < this.maxRetries) {
-                setTimeout(() => this.syncViews(), 5000); // Reintentar en 5 segundos
+                setTimeout(() => this.syncViews(), 5000);
             }
         }
     }
@@ -224,6 +252,77 @@ class GlobalViewsManager {
 
 // Instancia global del manager
 const globalViewsManager = new GlobalViewsManager();
+
+// ========================================
+// 📅 SISTEMA DE PROGRAMACIÓN DE EPISODIOS
+// ========================================
+
+// Verificar si un episodio está disponible
+function isEpisodeAvailable(episode) {
+    if (!episode.fechaDisponible) {
+        return true; // Si no tiene fecha programada, está disponible
+    }
+    
+    const releaseDate = new Date(episode.fechaDisponible);
+    const now = new Date();
+    
+    return now >= releaseDate;
+}
+
+// Obtener tiempo restante hasta que esté disponible
+function getTimeUntilAvailable(episode) {
+    if (!episode.fechaDisponible || isEpisodeAvailable(episode)) {
+        return null;
+    }
+    
+    const releaseDate = new Date(episode.fechaDisponible);
+    const now = new Date();
+    const diff = releaseDate - now;
+    
+    if (diff <= 0) return null;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    return { days, hours, minutes, seconds, totalMs: diff };
+}
+
+// Formatear fecha de disponibilidad para mostrar
+function formatReleaseDate(episode) {
+    if (!episode.fechaDisponible) return null;
+    
+    const releaseDate = new Date(episode.fechaDisponible);
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    // Formatear fecha
+    const dateOptions = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        timeZone: userTimeZone
+    };
+    
+    // Formatear hora
+    const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: userTimeZone
+    };
+    
+    const formattedDate = releaseDate.toLocaleDateString('es-ES', dateOptions);
+    const formattedTime = releaseDate.toLocaleTimeString('es-ES', timeOptions);
+    const timeZoneName = releaseDate.toLocaleDateString('es-ES', { timeZoneName: 'short', timeZone: userTimeZone }).split(' ').pop();
+    
+    return {
+        date: formattedDate,
+        time: formattedTime,
+        timezone: timeZoneName,
+        full: `${formattedDate} a las ${formattedTime} (${timeZoneName})`
+    };
+}
 
 // Función para obtener todos los episodios
 function getAllEpisodes() {
@@ -235,11 +334,19 @@ function getFeaturedEpisodes() {
     return episodios.filter(ep => ep.destacado);
 }
 
-// Función para obtener episodios nuevos (últimos 5 para el inicio)
+// 🆕 NUEVA: Función para obtener SOLO episodios nuevos (máximo 5)
 function getNewEpisodes() {
-    return episodios
-        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-        .slice(0, 5);
+    const newEpisodes = episodios
+        .filter(ep => ep.esNuevo) // Solo episodios marcados como nuevos
+        .sort((a, b) => {
+            // Ordenar por fecha de disponibilidad, luego por fecha regular
+            const dateA = new Date(a.fechaDisponible || a.fecha);
+            const dateB = new Date(b.fechaDisponible || b.fecha);
+            return dateB - dateA;
+        })
+        .slice(0, 5); // Máximo 5 episodios
+    
+    return newEpisodes;
 }
 
 // Función para obtener episodio por ID
@@ -247,7 +354,7 @@ function getEpisodeById(id) {
     return episodios.find(ep => ep.id === id);
 }
 
-// Función para formatear fecha
+// Función para formatear fecha normal
 function formatDate(dateString) {
     const date = new Date(dateString);
     const months = [
@@ -269,23 +376,21 @@ function isNewEpisode(dateString) {
 // 🌐 Función para incrementar vistas GLOBALMENTE
 async function incrementViews(episodeId) {
     const episode = episodios.find(ep => ep.id === episodeId);
-    if (!episode) return;
+    if (!episode || !isEpisodeAvailable(episode)) {
+        showToast('⏰ Este episodio aún no está disponible', 'info');
+        return;
+    }
 
     try {
-        // Incrementar vista global
         const newViewCount = await globalViewsManager.incrementGlobalView(episodeId);
         episode.views = newViewCount;
         
-        // Actualizar interfaz
         updateTotalViews();
         updateLikesDisplay(episodeId);
-        
-        // Mostrar notificación sutil
         showViewIncrement();
         
     } catch (error) {
         console.log('Error al incrementar vista:', error);
-        // Fallback a sistema local
         episode.views++;
         updateTotalViews();
     }
@@ -313,7 +418,45 @@ function showViewIncrement() {
     }, 2000);
 }
 
-// Resto de las funciones existentes...
+// 🕒 Sistema de countdown automático
+function startCountdownUpdates() {
+    setInterval(() => {
+        const newEpisodes = getNewEpisodes();
+        newEpisodes.forEach(episode => {
+            if (!isEpisodeAvailable(episode)) {
+                updateCountdownDisplay(episode.id);
+            }
+        });
+    }, 1000); // Actualizar cada segundo
+}
+
+function updateCountdownDisplay(episodeId) {
+    const episode = getEpisodeById(episodeId);
+    if (!episode) return;
+    
+    const countdownElement = document.querySelector(`[data-episode-id="${episodeId}"] .countdown-overlay`);
+    if (!countdownElement) return;
+    
+    const timeLeft = getTimeUntilAvailable(episode);
+    if (!timeLeft) {
+        // Episodio disponible, recargar la sección
+        loadNewEpisodes();
+        return;
+    }
+    
+    let countdownText = '';
+    if (timeLeft.days > 0) {
+        countdownText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m`;
+    } else if (timeLeft.hours > 0) {
+        countdownText = `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+    } else {
+        countdownText = `${timeLeft.minutes}m ${timeLeft.seconds}s`;
+    }
+    
+    countdownElement.querySelector('.countdown-time').textContent = countdownText;
+}
+
+// Resto de funciones existentes...
 function getLikes(episodeId) {
     const likes = localStorage.getItem('episodeLikes');
     const likesData = likes ? JSON.parse(likes) : {};
@@ -395,7 +538,7 @@ function shareEpisode(episodeId) {
     } else {
         const url = window.location.href;
         navigator.clipboard.writeText(url).then(() => {
-            alert('¡Enlace copiado al portapapeles!');
+            showToast('¡Enlace copiado al portapapeles!', 'success');
         });
     }
 }
@@ -409,7 +552,13 @@ async function loadStoredViews() {
 }
 
 function getTotalViews() {
-    return episodios.reduce((total, episode) => total + episode.views, 0);
+    return episodios.reduce((total, episode) => {
+        // Solo contar vistas de episodios disponibles
+        if (isEpisodeAvailable(episode)) {
+            return total + episode.views;
+        }
+        return total;
+    }, 0);
 }
 
 function updateTotalViews() {
@@ -434,14 +583,17 @@ function updateTotalViews() {
 }
 
 function updateEpisodeCount() {
+    // Solo contar episodios disponibles
+    const availableCount = episodios.filter(ep => isEpisodeAvailable(ep)).length;
+    
     const episodeCountElement = document.getElementById('episodeCount');
     if (episodeCountElement) {
-        episodeCountElement.textContent = episodios.length;
+        episodeCountElement.textContent = availableCount;
     }
     
     const aboutEpisodeCountElement = document.getElementById('aboutEpisodeCount');
     if (aboutEpisodeCountElement) {
-        aboutEpisodeCountElement.textContent = episodios.length + '+';
+        aboutEpisodeCountElement.textContent = availableCount + '+';
     }
 }
 
@@ -450,6 +602,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadStoredViews();
     updateTotalViews();
     updateEpisodeCount();
+    startCountdownUpdates(); // Iniciar sistema de countdown
     
     // Sincronizar vistas cada 30 segundos
     setInterval(() => {
