@@ -243,6 +243,33 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+// 🔥 NUEVA FUNCIÓN: Detener video si el usuario navega o recarga
+window.addEventListener('beforeunload', function() {
+    const videoFrame = document.getElementById('videoFrame');
+    if (videoFrame) {
+        videoFrame.src = 'about:blank';
+    }
+});
+
+// 🔥 NUEVA FUNCIÓN: Detener video si se pierde el foco de la página
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        const modal = document.getElementById('videoModal');
+        if (modal && modal.style.display === 'block') {
+            // Pausar el video cuando la página no está visible
+            const videoFrame = document.getElementById('videoFrame');
+            if (videoFrame && videoFrame.src !== 'about:blank') {
+                // Enviar mensaje de pausa al iframe (funciona con algunos reproductores)
+                try {
+                    videoFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                } catch (e) {
+                    // Si no funciona, no pasa nada
+                }
+            }
+        }
+    }
+});
+
 function updateCounters() {
     updateEpisodeCount();
     updateTotalViews();
