@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JoshuaSubs - Shin Chan en Español</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,6 +22,10 @@
                     <li><a href="index.html" class="nav-link active">🏠 Inicio</a></li>
                     <li><a href="episodios.html" class="nav-link">🎬 Episodios</a></li>
                     <li><a href="acerca.html" class="nav-link">👤 Acerca</a></li>
+                    <!-- NUEVO: Botón de refrescar -->
+                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar para ver nuevos episodios">
+                        <i class="fas fa-sync-alt"></i> Actualizar
+                    </button></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -49,6 +54,13 @@
                     <div class="stat-number" id="totalViews">0</div>
                     <div class="stat-label">Total Visualizaciones</div>
                 </div>
+                <!-- NUEVO: Botón de actualización en hero -->
+                <div class="stat-card refresh-card">
+                    <button class="hero-refresh-btn" onclick="smartRefresh()" title="Buscar nuevos episodios">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-label">Buscar Nuevos Episodios</div>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="hero-image">
@@ -56,10 +68,25 @@
         </div>
     </section>
 
+    <!-- NUEVO: Notificación de actualización -->
+    <div id="updateNotification" class="update-notification hidden">
+        <div class="notification-content">
+            <i class="fas fa-info-circle"></i>
+            <span>¡Hay nuevos episodios disponibles!</span>
+            <button onclick="forceRefresh()" class="notification-btn">Actualizar Ahora</button>
+            <button onclick="closeNotification()" class="notification-close">&times;</button>
+        </div>
+    </div>
+
     <!-- Episodios Destacados -->
     <section class="featured-section">
         <div class="container">
-            <h2 class="section-title">⭐ Episodios Destacados</h2>
+            <div class="section-header">
+                <h2 class="section-title">⭐ Episodios Destacados</h2>
+                <button class="section-refresh-btn" onclick="refreshSection('featured')" title="Actualizar destacados">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
             <div class="episodes-grid" id="featuredEpisodes">
                 <!-- Los episodios destacados se cargarán aquí -->
             </div>
@@ -69,7 +96,12 @@
     <!-- Nuevos Episodios -->
     <section class="new-episodes-section">
         <div class="container">
-            <h2 class="section-title">🆕 Nuevos Episodios</h2>
+            <div class="section-header">
+                <h2 class="section-title">🆕 Nuevos Episodios</h2>
+                <button class="section-refresh-btn" onclick="refreshSection('new')" title="Actualizar nuevos">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
             <div class="episodes-grid" id="newEpisodes">
                 <!-- Los nuevos episodios se cargarán aquí -->
             </div>
@@ -79,17 +111,7 @@
     <!-- Modal para reproducir episodios -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Título del Episodio</h3>
-                <button class="close-btn" onclick="closeModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="video-container">
-                    <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
+            <!-- El contenido se genera dinámicamente -->
         </div>
     </div>
 
@@ -100,12 +122,14 @@
                 <div class="footer-section">
                     <h3>JoshuaSubs</h3>
                     <p>Subtítulos de calidad para Shin Chan</p>
+                    <p class="last-updated">Última actualización: <span id="lastUpdate">Cargando...</span></p>
                 </div>
                 <div class="footer-section">
                     <h4>Enlaces</h4>
                     <ul>
                         <li><a href="#">📱 Canal de Telegram</a></li>
                         <li><a href="acerca.html">👤 Sobre Joshua Plata</a></li>
+                        <li><button onclick="forceRefresh()" class="footer-refresh">🔄 Forzar Actualización</button></li>
                     </ul>
                 </div>
             </div>
@@ -117,5 +141,6 @@
 
     <script src="js/episodios.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/refresh.js"></script>
 </body>
 </html>
