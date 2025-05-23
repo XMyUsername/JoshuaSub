@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episodios - JoshuaSubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>🎌 JoshuaSubs</h1>
+                    <span class="tagline">Shin Chan en Español</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">🏠 Inicio</a></li>
+                    <li><a href="episodios.html" class="nav-link active">🎬 Episodios</a></li>
+                    <li><a href="acerca.html" class="nav-link">👤 Acerca</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>🎬 Catálogo de Episodios</h1>
+            <p>Todos los episodios de Shin Chan disponibles</p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">📺 Todos</button>
+                <button class="filter-btn" data-filter="destacado">⭐ Destacados</button>
+                <button class="filter-btn" data-filter="nuevo">🆕 Nuevos</button>
+            </div>
+            <div class="sort-options">
+                <select id="sortSelect" class="sort-select">
+                    <option value="newest">🗓️ Más Recientes</option>
+                    <option value="oldest">📅 Más Antiguos</option>
+                    <option value="title">🔤 Por Título</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episodios Grid -->
+    <section class="episodes-catalog">
+        <div class="container">
+            <div class="episodes-grid" id="allEpisodes">
+                <!-- Los episodios se cargarán aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para reproducir episodios -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Título del Episodio</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JoshuaSubs</h3>
+                    <p>Subtítulos de calidad para Shin Chan</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#">📱 Canal de Telegram</a></li>
+                        <li><a href="acerca.html">👤 Sobre Joshua Plata</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <small>Este sitio no almacena ningún archivo en nuestro servidor. Todos los videos están enlazados desde servicios externos como DailyMotion.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/episodios.js"></script>
+    <script src="js/episodios-page.js"></script>
+</body>
+</html>
