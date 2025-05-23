@@ -1032,27 +1032,191 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Importar estilos de refresh */
-@import url('refresh-styles.css');
+/* ========================================
+   🔄 ESTILOS DE ACTUALIZACIÓN MEJORADOS
+   ======================================== */
 
-/* Toast notifications */
+/* Botón en el navbar - más bonito */
+.refresh-btn {
+    background: linear-gradient(135deg, var(--accent-color), #2196F3);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 10px rgba(50, 181, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.refresh-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.refresh-btn:hover::before {
+    left: 100%;
+}
+
+.refresh-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(50, 181, 255, 0.4);
+}
+
+.refresh-btn.loading {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+/* Botón en el hero - más llamativo */
+.refresh-card {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color), #FF6B6B);
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.refresh-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.refresh-card:hover::before {
+    opacity: 1;
+}
+
+.refresh-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hero-refresh-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.hero-refresh-btn.loading .stat-icon {
+    animation: spin 2s linear infinite;
+}
+
+/* Botones en las secciones - más elegantes */
+.section-refresh-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+    border: 3px solid var(--accent-color);
+    color: var(--accent-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(50, 181, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-refresh-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--accent-color);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.section-refresh-btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.section-refresh-btn:hover {
+    color: white;
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 8px 25px rgba(50, 181, 255, 0.4);
+}
+
+.section-refresh-btn i {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.section-refresh-btn.loading i {
+    animation: spin 1s linear infinite;
+}
+
+/* Toast notifications - más bonitas */
 .refresh-toast {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border: 2px solid var(--accent-color);
     color: var(--text-color);
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    padding: 1.2rem 1.8rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     z-index: 2000;
     transform: translateX(100%);
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    max-width: 380px;
+    position: relative;
+    overflow: hidden;
+}
+
+.refresh-toast::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(50, 181, 255, 0.1), rgba(255, 59, 48, 0.1));
+    z-index: -1;
 }
 
 .refresh-toast.show {
@@ -1060,19 +1224,51 @@ html {
     opacity: 1;
 }
 
-.refresh-toast i {
-    color: var(--accent-color);
+.refresh-toast.success {
+    border-color: #4CAF50;
 }
 
-/* Global loader */
+.refresh-toast.success::before {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
+}
+
+.refresh-toast.error {
+    border-color: #f44336;
+}
+
+.refresh-toast.error::before {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(255, 87, 34, 0.1));
+}
+
+.toast-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent-color);
+    transition: width 3s linear;
+}
+
+/* Global loader - más espectacular */
 #globalLoader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 247, 224, 0.95);
-    backdrop-filter: blur(5px);
+    background: linear-gradient(135deg, rgba(255, 247, 224, 0.98), rgba(255, 247, 224, 0.95));
+    backdrop-filter: blur(10px);
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -1082,16 +1278,156 @@ html {
 .global-loader-content {
     text-align: center;
     color: var(--primary-color);
+    max-width: 400px;
+    padding: 2rem;
+}
+
+.global-loader-content p {
+    margin: 1.5rem 0 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.global-loader-content small {
+    opacity: 0.8;
+    font-size: 1rem;
 }
 
 .loader-spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(255, 59, 48, 0.2);
-    border-top: 4px solid var(--primary-color);
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 59, 48, 0.2);
+    border-top: 5px solid var(--primary-color);
+    border-right: 5px solid var(--accent-color);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 1rem;
+    animation: spin 1.2s linear infinite;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(255, 59, 48, 0.3);
+}
+
+.loader-progress {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 59, 48, 0.2);
+    border-radius: 3px;
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+.loader-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 3px;
+    transition: width 2s ease-out;
+}
+
+/* Botón en el footer - más sutil */
+.footer-refresh {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: inherit;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-refresh::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(50, 181, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.footer-refresh:hover::before {
+    left: 100%;
+}
+
+.footer-refresh:hover {
+    color: var(--accent-color);
+    background: rgba(50, 181, 255, 0.1);
+}
+
+/* Animaciones */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+    .refresh-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .refresh-btn span {
+        display: none;
+    }
+    
+    .section-refresh-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+    
+    .refresh-toast {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        bottom: 10px;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .refresh-card {
+        grid-column: 1 / -1;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-refresh-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .global-loader-content {
+        padding: 1rem;
+    }
+    
+    .global-loader-content p {
+        font-size: 1.2rem;
+    }
+    
+    .loader-spinner {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 /* Menú móvil mejorado */
