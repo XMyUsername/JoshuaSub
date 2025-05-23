@@ -69,6 +69,16 @@ const episodios = [
         fecha: "2025-05-23",
         portada: "img/thumbnail-placeholder.jpg",
         views: 0
+    },
+    {
+        id: 8,
+        titulo: "¡Voy a construir un increíble castillo!",
+        descripcion: "Shin-Chan y sus amigos estan haciendo un castillo, cuando llega guepardo a molestarlos. para despues competir por ver quien hace un mejor castillo.. ¿Quien Ganara?",
+        url: "https://www.dailymotion.com/embed/video/k39ikjsP00ZMnYD6Iqy",
+        destacado: false,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
     }
 ];
 
