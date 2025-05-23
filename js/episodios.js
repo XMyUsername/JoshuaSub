@@ -68,7 +68,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k12D1wuHhJTkauD6Hqe",
         destacado: false,
         fecha: "2025-05-23",
-        fechaDisponible: null, 
+        fechaDisponible: null, // Ya disponible
         portada: "img/Menko.png",
         views: 0,
         esNuevo: true
@@ -76,11 +76,11 @@ const episodios = [
     {
         id: 7,
         titulo: "¡Aventura en el castillo!",
-        descripcion: "Shin-chan y sus amigos estaban haciendo un castillo de arena, cuando llega guepardo y los desafia a ver quien hace el mejor castillo. ¿Quien ganara? ",
+        descripcion: "Shin-chan y sus amigos estaban haciendo un castillo de arena, cuando llega guepardo y los desafia a ver quien hace el mejor castillo. ¿Quien ganara?",
         url: "https://www.dailymotion.com/embed/video/k39ikjsP00ZMnYD6Iqy",
         destacado: false,
         fecha: "2025-05-24",
-        fechaDisponible: null,
+        fechaDisponible: null, // Ya disponible
         portada: "img/Castillo.png",
         views: 0,
         esNuevo: true
@@ -92,7 +92,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
         destacado: false,
         fecha: "2025-05-25",
-        fechaDisponible: Null, // México timezone
+        fechaDisponible: null, // ✅ Corregido: null en lugar de Null
         portada: "img/4DEnCasa.png",
         views: 0,
         esNuevo: true
@@ -104,7 +104,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_9]",
         destacado: false,
         fecha: "2025-05-26",
-        fechaDisponible: "2025-05-26T19:45:00-06:00", // México timezone
+        fechaDisponible: "2025-05-26T19:45:00-06:00", // México timezone - Mañana 19:45
         portada: "img/Volveracasa.png",
         views: 0,
         esNuevo: true
