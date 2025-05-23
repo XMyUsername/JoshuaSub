@@ -59,6 +59,16 @@ const episodios = [
         fecha: "2025-05-23",
         portada: "img/thumbnail-placeholder.jpg",
         views: 0
+    },
+    {
+        id: 7,
+        titulo: "¡4D en casa!",
+        descripcion: "Hiroshi, iba a ir a ver una pelicula 4D con kawaguchi. pero se olvido de comprar las entradas asi que no la pudieron ver.., hiroshi al contarle a misae que no pudo ver la pelicula, en secreto misae prepara una experienca 4d en casa. pero.. ¿Que Sucederá?",
+        url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
+        destacado: false,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
     }
 ];
 
