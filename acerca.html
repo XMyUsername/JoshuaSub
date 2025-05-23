@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de - JoshuaSubs</title>
+    <title>Acerca de Joshua Plata - JoshuaSubs</title>
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,52 +18,52 @@
                     <h1>🎌 JoshuaSubs</h1>
                     <span class="tagline">Shin Chan en Español</span>
                 </div>
-                <ul class="nav-menu">
+                <!-- Navegación desktop -->
+                <ul class="nav-menu desktop-only">
                     <li><a href="index.html" class="nav-link">🏠 Inicio</a></li>
                     <li><a href="episodios.html" class="nav-link">🎬 Episodios</a></li>
                     <li><a href="acerca.html" class="nav-link active">👤 Acerca</a></li>
+                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar página">
+                        <i class="fas fa-sync-alt"></i> <span>Actualizar</span>
+                    </button></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
         </nav>
     </header>
 
-    <!-- About Section -->
+    <!-- About Hero -->
     <section class="about-hero">
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
                     <div class="profile-circle">
-                        <img src="img/avatar.jpg" alt="Joshua Plata" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-user-circle\"></i>'">
+                        <img src="img/avatar.png" alt="Joshua Plata" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
                     </div>
                 </div>
                 <div class="about-text">
-                    <h1>👋 Hola, soy Joshua Plata</h1>
-                    <p class="about-subtitle">Subtitulador apasionado de Shin Chan</p>
+                    <h1>👋 ¡Hola! Soy Joshua Plata</h1>
+                    <p class="about-subtitle">🎌 Subtitulador apasionado por Shin Chan</p>
                     
                     <div class="story-section">
                         <h2>📖 Mi Historia</h2>
-                        <p>Todo comenzó en mayo de 2024 cuando decidí compartir mi amor por Shin Chan con la comunidad hispanohablante. Lo que empezó como un hobby se convirtió en una pasión que ya cuenta con más de 30 episodios subtitulados.</p>
+                        <p>¡Hola a todos! Soy Joshua, un gran fanático de <strong>Shin Chan</strong> desde que era niño. Lo que comenzó como una simple afición por esta increíble serie se convirtió en una pasión por compartir estos episodios con subtítulos de calidad para toda la comunidad hispana.</p>
                         
-                        <p>Aunque mi canal anterior de Facebook fue eliminado, eso no me detuvo. Aquí estoy, más fuerte que nunca, compartiendo contenido de calidad para todos los fans de Shin Chan.</p>
-                        
-                        <blockquote class="quote">
-                            "El subtítulo perfecto no es solo traducción, es pasión."
+                        <div class="quote">
+                            "Mi objetivo es que todos puedan disfrutar de Shin Chan con la mejor calidad de subtitulado posible."
                             <cite>- Joshua Plata</cite>
-                        </blockquote>
+                        </div>
+                        
+                        <p>Cada episodio que subo es cuidadosamente subtitulado, revisado y optimizado para ofrecer la mejor experiencia de visualización. Me encanta poder contribuir a que más personas disfruten de las aventuras de Shinnosuke Nohara.</p>
                     </div>
 
                     <div class="mission-section">
                         <h2>🎯 Mi Misión</h2>
                         <ul class="mission-list">
-                            <li>✨ Ofrecer subtítulos de la más alta calidad</li>
-                            <li>🎭 Mantener el humor y personalidad originales</li>
-                            <li>❤️ Conectar con la comunidad de fans</li>
-                            <li>📱 Hacer el contenido accesible para todos</li>
+                            <li>🎬 <strong>Calidad ante todo:</strong> Subtítulos precisos y bien sincronizados</li>
+                            <li>⚡ <strong>Actualizaciones frecuentes:</strong> Nuevos episodios regularmente</li>
+                            <li>🌟 <strong>Experiencia premium:</strong> La mejor calidad de video disponible</li>
+                            <li>❤️ <strong>Comunidad unida:</strong> Crear un espacio para fans de Shin Chan</li>
+                            <li>🆓 <strong>Acceso gratuito:</strong> Todo el contenido disponible sin costo</li>
                         </ul>
                     </div>
 
@@ -71,32 +71,63 @@
                         <h2>📊 Estadísticas</h2>
                         <div class="about-stats">
                             <div class="about-stat">
-                                <span class="stat-number" id="aboutEpisodeCount">30+</span>
+                                <span class="stat-number" id="aboutEpisodeCount">8+</span>
                                 <span class="stat-label">Episodios Subtitulados</span>
                             </div>
                             <div class="about-stat">
-                                <span class="stat-number">12</span>
-                                <span class="stat-label">Meses de Experiencia</span>
+                                <span class="stat-number" id="aboutTotalViews">1.2K+</span>
+                                <span class="stat-label">Visualizaciones Totales</span>
                             </div>
                             <div class="about-stat">
-                                <span class="stat-number" id="aboutTotalViews">0</span>
-                                <span class="stat-label">Visualizaciones Totales</span>
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Dedicación y Amor</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="contact-section">
-                        <h2>📱 Mantente Conectado</h2>
-                        <p>Únete a nuestra comunidad en Telegram para estar al día con los últimos episodios y novedades:</p>
-                        <a href="#" class="telegram-btn">
-                            <i class="fab fa-telegram"></i>
-                            Únete al Canal de Telegram
-                        </a>
+                        <h2>📱 Sígueme y Contáctame</h2>
+                        <p>¿Tienes alguna sugerencia, comentario o simplemente quieres estar al día con los nuevos episodios? ¡Sígueme en mis redes sociales!</p>
+                        
+                        <div style="margin-top: 2rem; text-align: center;">
+                            <a href="#" class="telegram-btn">
+                                <i class="fab fa-telegram"></i>
+                                Únete al Canal de Telegram
+                            </a>
+                        </div>
+                        
+                        <p style="margin-top: 2rem; text-align: center; opacity: 0.8;">
+                            <strong>¿Sugerencias de episodios?</strong><br>
+                            Siempre estoy abierto a sugerencias de la comunidad. ¡Tu opinión es muy importante para mí!
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Bottom Navigation para Móvil -->
+    <nav class="bottom-nav mobile-only">
+        <a href="index.html" class="bottom-nav-item" data-page="inicio">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="episodios.html" class="bottom-nav-item" data-page="episodios">
+            <i class="fas fa-film"></i>
+            <span>Episodios</span>
+        </a>
+        <button class="bottom-nav-item refresh-nav-btn" onclick="smartRefresh()" data-page="refresh">
+            <i class="fas fa-sync-alt"></i>
+            <span>Actualizar</span>
+        </button>
+        <a href="acerca.html" class="bottom-nav-item active" data-page="acerca">
+            <i class="fas fa-user"></i>
+            <span>Acerca</span>
+        </a>
+    </nav>
+
+    <!-- Spacer para bottom navigation -->
+    <div class="bottom-nav-spacer mobile-only"></div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -105,12 +136,14 @@
                 <div class="footer-section">
                     <h3>JoshuaSubs</h3>
                     <p>Subtítulos de calidad para Shin Chan</p>
+                    <p class="last-updated">Última actualización: <span id="lastUpdate">Cargando...</span></p>
                 </div>
                 <div class="footer-section">
                     <h4>Enlaces</h4>
                     <ul>
                         <li><a href="#">📱 Canal de Telegram</a></li>
                         <li><a href="acerca.html">👤 Sobre Joshua Plata</a></li>
+                        <li><button onclick="forceRefresh()" class="footer-refresh">🔄 Forzar Actualización</button></li>
                     </ul>
                 </div>
             </div>
@@ -121,6 +154,6 @@
     </footer>
 
     <script src="js/episodios.js"></script>
-    <script src="js/about.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
