@@ -1702,5 +1702,157 @@ html {
     }
 }
 
+/* ========================================
+   🌐 COMPATIBILIDAD MULTI-PÁGINA
+   ======================================== */
+
+/* Asegurar que el spacer funcione en todas las páginas */
+@media screen and (max-width: 768px) {
+    .about-hero,
+    .page-header,
+    .episodes-catalog {
+        margin-bottom: 0;
+        padding-bottom: 2rem;
+    }
+    
+    .footer {
+        margin-bottom: 0;
+    }
+    
+    /* Ajustes específicos para página de episodios */
+    .filters-section {
+        padding: 1.5rem 0;
+    }
+    
+    .filters {
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 25px;
+    }
+    
+    .sort-options {
+        margin-top: 1rem;
+    }
+    
+    .sort-select {
+        padding: 0.8rem 1.2rem;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Ajustes para página about */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .about-image {
+        position: static;
+        order: -1;
+    }
+    
+    .profile-circle {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .about-text {
+        padding: 0 var(--mobile-padding);
+    }
+    
+    .story-section,
+    .mission-section,
+    .stats-section,
+    .contact-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border-radius: var(--mobile-card-radius);
+        box-shadow: var(--mobile-shadow);
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .about-stat {
+        background: var(--bg-color);
+        padding: 1.2rem;
+        border-radius: var(--mobile-card-radius);
+        border: 1px solid rgba(255, 59, 48, 0.1);
+    }
+    
+    .telegram-btn {
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        box-shadow: var(--mobile-shadow);
+    }
+    
+    /* Asegurar que el contenido no se oculte detrás del bottom nav */
+    body {
+        padding-bottom: 0;
+    }
+}
+
+/* ========================================
+   🔄 ESTADO DE PÁGINA ACTIVA MEJORADO
+   ======================================== */
+
+.bottom-nav-item.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 59, 48, 0.4);
+}
+
+.bottom-nav-item.active::before {
+    opacity: 1;
+}
+
+/* ========================================
+   📱 RESPONSIVE LANDSCAPE PARA TODAS LAS PÁGINAS
+   ======================================== */
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .page-header {
+        padding: 2rem 0;
+    }
+    
+    .page-header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .about-hero {
+        padding: 2rem 0;
+    }
+    
+    .about-content {
+        gap: 1.5rem;
+    }
+    
+    .profile-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .story-section,
+    .mission-section,
+    .stats-section,
+    .contact-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
 
 @import url('css/bottom-navigation.css');
