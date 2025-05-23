@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Simplificado para Móvil -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
@@ -18,20 +18,15 @@
                     <h1>🎌 JoshuaSubs</h1>
                     <span class="tagline">Shin Chan en Español</span>
                 </div>
-                <ul class="nav-menu">
+                <!-- Navegación desktop (se oculta en móvil) -->
+                <ul class="nav-menu desktop-only">
                     <li><a href="index.html" class="nav-link active">🏠 Inicio</a></li>
                     <li><a href="episodios.html" class="nav-link">🎬 Episodios</a></li>
                     <li><a href="acerca.html" class="nav-link">👤 Acerca</a></li>
-                    <!-- NUEVO: Botón de refrescar -->
-                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar para ver nuevos episodios">
-                        <i class="fas fa-sync-alt"></i> Actualizar
+                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar página">
+                        <i class="fas fa-sync-alt"></i> <span>Actualizar</span>
                     </button></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
         </nav>
     </header>
@@ -54,7 +49,7 @@
                     <div class="stat-number" id="totalViews">0</div>
                     <div class="stat-label">Total Visualizaciones</div>
                 </div>
-                <!-- NUEVO: Botón de actualización en hero -->
+                <!-- Botón de actualización en hero -->
                 <div class="stat-card refresh-card">
                     <button class="hero-refresh-btn" onclick="smartRefresh()" title="Buscar nuevos episodios">
                         <div class="stat-icon">🔄</div>
@@ -67,16 +62,6 @@
             <div class="floating-icon">🎌</div>
         </div>
     </section>
-
-    <!-- NUEVO: Notificación de actualización -->
-    <div id="updateNotification" class="update-notification hidden">
-        <div class="notification-content">
-            <i class="fas fa-info-circle"></i>
-            <span>¡Hay nuevos episodios disponibles!</span>
-            <button onclick="forceRefresh()" class="notification-btn">Actualizar Ahora</button>
-            <button onclick="closeNotification()" class="notification-close">&times;</button>
-        </div>
-    </div>
 
     <!-- Episodios Destacados -->
     <section class="featured-section">
@@ -115,6 +100,29 @@
         </div>
     </div>
 
+    <!-- NUEVA: Bottom Navigation para Móvil -->
+    <nav class="bottom-nav mobile-only">
+        <a href="index.html" class="bottom-nav-item active" data-page="inicio">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="episodios.html" class="bottom-nav-item" data-page="episodios">
+            <i class="fas fa-film"></i>
+            <span>Episodios</span>
+        </a>
+        <button class="bottom-nav-item refresh-nav-btn" onclick="smartRefresh()" data-page="refresh">
+            <i class="fas fa-sync-alt"></i>
+            <span>Actualizar</span>
+        </button>
+        <a href="acerca.html" class="bottom-nav-item" data-page="acerca">
+            <i class="fas fa-user"></i>
+            <span>Acerca</span>
+        </a>
+    </nav>
+
+    <!-- Spacer para bottom navigation -->
+    <div class="bottom-nav-spacer mobile-only"></div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -139,8 +147,8 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="js/episodios.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/refresh.js"></script>
 </body>
 </html>
