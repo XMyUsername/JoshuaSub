@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeHomePage();
-    setupBottomNavigation(); // Nueva función
+    setupBottomNavigation();
     initializeRefreshSystem();
 });
 
@@ -42,10 +42,13 @@ function loadNewEpisodes() {
     }
     
     newEpisodes.forEach(episode => {
-        container.appendChild(createEpisodeCard(episode));
+        container.appendChild(createNewEpisodeCard(episode));
     });
 }
 
+// ========================================
+// 🎴 FUNCIÓN PARA CREAR TARJETAS NORMALES
+// ========================================
 function createEpisodeCard(episode) {
     const card = document.createElement('div');
     card.className = 'episode-card';
@@ -80,6 +83,100 @@ function createEpisodeCard(episode) {
     return card;
 }
 
+// ========================================
+// 🎴 FUNCIÓN PARA CREAR TARJETAS CON COUNTDOWN
+// ========================================
+function createNewEpisodeCard(episode) {
+    const card = document.createElement('div');
+    const isAvailable = isEpisodeAvailable(episode);
+    const timeLeft = getTimeUntilAvailable(episode);
+    const releaseInfo = formatReleaseDate(episode);
+    
+    // Determinar clases CSS
+    let cardClasses = 'episode-card';
+    if (!isAvailable) {
+        cardClasses += ' not-available';
+    } else if (episode.esNuevo) {
+        // Verificar si se liberó recientemente (últimas 24 horas)
+        if (episode.fechaDisponible) {
+            const releaseDate = new Date(episode.fechaDisponible);
+            const now = new Date();
+            const timeSinceRelease = now - releaseDate;
+            const hoursAgo = timeSinceRelease / (1000 * 60 * 60);
+            
+            if (hoursAgo <= 24) {
+                cardClasses += ' just-released';
+            }
+        }
+    }
+    
+    card.className = cardClasses;
+    card.setAttribute('data-episode-id', episode.id);
+    
+    // Determinar badge
+    let badgeHTML = '';
+    if (!isAvailable) {
+        badgeHTML = '<div class="episode-badge badge-coming-soon">⏰ Próximamente</div>';
+    } else if (episode.esNuevo) {
+        badgeHTML = '<div class="episode-badge badge-available-new">🆕 ¡Nuevo!</div>';
+    } else if (episode.destacado) {
+        badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
+    }
+    
+    // Crear overlay de countdown si no está disponible
+    let countdownHTML = '';
+    if (!isAvailable && timeLeft) {
+        let countdownText = '';
+        if (timeLeft.days > 0) {
+            countdownText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m`;
+        } else if (timeLeft.hours > 0) {
+            countdownText = `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+        } else {
+            countdownText = `${timeLeft.minutes}m ${timeLeft.seconds}s`;
+        }
+        
+        countdownHTML = `
+            <div class="countdown-overlay">
+                <div class="countdown-icon">⏰</div>
+                <div class="countdown-title">Disponible en:</div>
+                <div class="countdown-time" data-time="${countdownText}">${countdownText}</div>
+                <div class="release-info">
+                    Estreno: ${releaseInfo ? releaseInfo.full : 'Próximamente'}
+                </div>
+                <button class="coming-soon-btn" disabled>
+                    <i class="fas fa-clock"></i> Próximamente
+                </button>
+            </div>
+        `;
+    }
+    
+    card.innerHTML = `
+        <div class="episode-image">
+            ${badgeHTML}
+            <img src="${episode.portada}" alt="${episode.titulo}" onerror="this.style.display='none';">
+            ${countdownHTML}
+        </div>
+        <div class="episode-content">
+            <h3 class="episode-title">${episode.titulo}</h3>
+            <p class="episode-description">${episode.descripcion}</p>
+            <div class="episode-meta">
+                <div class="episode-date">${formatDate(episode.fecha)}</div>
+                <div class="episode-views">👀 ${episode.views.toLocaleString()}</div>
+            </div>
+            <button class="play-btn" onclick="${isAvailable ? `openEpisodeModal(${episode.id})` : 'showNotAvailableMessage()'}" ${!isAvailable ? 'disabled' : ''}>
+                <i class="fas fa-${isAvailable ? 'play' : 'lock'}"></i> 
+                ${isAvailable ? 'Ver Episodio' : 'No Disponible'}
+            </button>
+        </div>
+    `;
+    
+    return card;
+}
+
+function showNotAvailableMessage() {
+    showToast('⏰ Este episodio estará disponible pronto. ¡Mantente atento!', 'info');
+}
+
 function updateCounters() {
     updateEpisodeCount();
     updateTotalViews();
@@ -89,6 +186,12 @@ function updateCounters() {
 function openEpisodeModal(episodeId) {
     const episode = getEpisodeById(episodeId);
     if (!episode) return;
+    
+    // Verificar si está disponible
+    if (!isEpisodeAvailable(episode)) {
+        showNotAvailableMessage();
+        return;
+    }
     
     const modal = document.getElementById('videoModal');
     const modalContent = modal.querySelector('.modal-content');
@@ -177,7 +280,7 @@ function closeModal() {
 }
 
 // ========================================
-// 📱 NUEVA NAVEGACIÓN BOTTOM
+// 📱 NAVEGACIÓN BOTTOM
 // ========================================
 
 function setupBottomNavigation() {
@@ -451,109 +554,3 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
 });
-
-function loadNewEpisodes() {
-    const container = document.getElementById('newEpisodes');
-    if (!container) return;
-    
-    const newEpisodes = getNewEpisodes(); // Solo 5 episodios nuevos
-    container.innerHTML = '';
-    
-    if (newEpisodes.length === 0) {
-        container.innerHTML = '<p class="loading">No hay episodios nuevos disponibles</p>';
-        return;
-    }
-    
-    newEpisodes.forEach(episode => {
-        container.appendChild(createNewEpisodeCard(episode));
-    });
-}
-
-function createNewEpisodeCard(episode) {
-    const card = document.createElement('div');
-    const isAvailable = isEpisodeAvailable(episode);
-    const timeLeft = getTimeUntilAvailable(episode);
-    const releaseInfo = formatReleaseDate(episode);
-    
-    // Determinar clases CSS
-    let cardClasses = 'episode-card';
-    if (!isAvailable) {
-        cardClasses += ' not-available';
-    } else if (episode.esNuevo) {
-        // Verificar si se liberó recientemente (últimas 24 horas)
-        const releaseDate = new Date(episode.fechaDisponible || episode.fecha);
-        const now = new Date();
-        const timeSinceRelease = now - releaseDate;
-        const hoursAgo = timeSinceRelease / (1000 * 60 * 60);
-        
-        if (hoursAgo <= 24) {
-            cardClasses += ' just-released';
-        }
-    }
-    
-    card.className = cardClasses;
-    card.setAttribute('data-episode-id', episode.id);
-    
-    // Determinar badge
-    let badgeHTML = '';
-    if (!isAvailable) {
-        badgeHTML = '<div class="episode-badge badge-coming-soon">⏰ Próximamente</div>';
-    } else if (episode.esNuevo) {
-        badgeHTML = '<div class="episode-badge badge-available-new">🆕 ¡Nuevo!</div>';
-    } else if (episode.destacado) {
-        badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
-    }
-    
-    // Crear overlay de countdown si no está disponible
-    let countdownHTML = '';
-    if (!isAvailable && timeLeft) {
-        let countdownText = '';
-        if (timeLeft.days > 0) {
-            countdownText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m`;
-        } else if (timeLeft.hours > 0) {
-            countdownText = `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
-        } else {
-            countdownText = `${timeLeft.minutes}m ${timeLeft.seconds}s`;
-        }
-        
-        countdownHTML = `
-            <div class="countdown-overlay">
-                <div class="countdown-icon">⏰</div>
-                <div class="countdown-title">Disponible en:</div>
-                <div class="countdown-time" data-time="${countdownText}">${countdownText}</div>
-                <div class="release-info">
-                    Estreno: ${releaseInfo ? releaseInfo.full : 'Próximamente'}
-                </div>
-                <button class="coming-soon-btn" disabled>
-                    <i class="fas fa-clock"></i> Próximamente
-                </button>
-            </div>
-        `;
-    }
-    
-    card.innerHTML = `
-        <div class="episode-image">
-            ${badgeHTML}
-            <img src="${episode.portada}" alt="${episode.titulo}" onerror="this.style.display='none';">
-            ${countdownHTML}
-        </div>
-        <div class="episode-content">
-            <h3 class="episode-title">${episode.titulo}</h3>
-            <p class="episode-description">${episode.descripcion}</p>
-            <div class="episode-meta">
-                <div class="episode-date">${formatDate(episode.fecha)}</div>
-                <div class="episode-views">👀 ${episode.views.toLocaleString()}</div>
-            </div>
-            <button class="play-btn" onclick="${isAvailable ? `openEpisodeModal(${episode.id})` : 'showNotAvailableMessage()'}" ${!isAvailable ? 'disabled' : ''}>
-                <i class="fas fa-${isAvailable ? 'play' : 'lock'}"></i> 
-                ${isAvailable ? 'Ver Episodio' : 'No Disponible'}
-            </button>
-        </div>
-    `;
-    
-    return card;
-}
-
-function showNotAvailableMessage() {
-    showToast('⏰ Este episodio estará disponible pronto. ¡Mantente atento!', 'info');
-}
