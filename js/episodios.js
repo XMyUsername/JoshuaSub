@@ -62,12 +62,12 @@ const episodios = [
     },
     {
         id: 6,
-        titulo: "¡Jugando Menko en el castillo!",
-        descripcion: "Los niños van a un castillo histórico donde aprenden sobre el juego tradicional japonés Menko y viven aventuras emocionantes explorando el lugar.",
-        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_6]",
+        titulo: "¡Jugando Menko con papa!",
+        descripcion: "Misae, le pregunta a hiroshi por el purificador de aire. pero hiroshi no lo sabe asi que va al armario a busacarlo, mientras buscaba encuentra una caja con cartas de su padre ginnosuke.. ¿Que sucedera a continuación?",
+        url: "https://www.dailymotion.com/embed/video/k12D1wuHhJTkauD6Hqe",
         destacado: false,
         fecha: "2025-05-23",
-        fechaDisponible: "2025-05-23T22:10:00-06:00", // México timezone (CDT)
+        fechaDisponible: null, 
         portada: "img/Menko.png",
         views: 0,
         esNuevo: true
@@ -75,48 +75,36 @@ const episodios = [
     {
         id: 7,
         titulo: "¡Aventura en el castillo!",
-        descripcion: "Shin-chan y su familia visitan un castillo antiguo donde descubren secretos históricos y viven momentos divertidos llenos de travesuras típicas de Shin-chan.",
-        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_7]",
+        descripcion: "Shin-chan y sus amigos estaban haciendo un castillo de arena, cuando llega guepardo y los desafia a ver quien hace el mejor castillo. ¿Quien ganara? ",
+        url: "https://www.dailymotion.com/embed/video/k39ikjsP00ZMnYD6Iqy",
         destacado: false,
         fecha: "2025-05-24",
-        fechaDisponible: "2025-05-24T18:30:00-06:00", // México timezone
+        fechaDisponible: null,
         portada: "img/Castillo.png",
         views: 0,
         esNuevo: true
     },
     {
         id: 8,
-        titulo: "¡Un día en casa con entretenimiento 4D!",
-        descripcion: "La familia Nohara decide quedarse en casa y experimentar con nuevas tecnologías de entretenimiento 4D que los llevan a vivir aventuras increíbles sin salir de su hogar.",
-        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_8]",
+        titulo: "¡4D en casa!",
+        descripcion: "Hiroshi, junto con su compañero kawaguchi hiban a ir a ver una pelicula 4D. pero hiroshi se olvido de comprar las entradas asi que no pudo, llamo a misae diciendo que no pudo ver la pelicula, entonces misae en secreto hara una experiencia 4D de la pelicula junto con shin-chan y hima. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
         destacado: false,
         fecha: "2025-05-25",
-        fechaDisponible: "2025-05-25T20:00:00-06:00", // México timezone
+        fechaDisponible: Null, // México timezone
         portada: "img/4DEnCasa.png",
         views: 0,
         esNuevo: true
     },
     {
         id: 9,
-        titulo: "¡Shin-chan va de compras!",
-        descripcion: "Shin-chan acompaña a su madre Misae de compras al supermercado, pero como siempre, convierte una tarea simple en toda una aventura llena de travesuras y momentos divertidos.",
+        titulo: "No puedo volver a casa fácilmente",
+        descripcion: "No disponible",
         url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_9]",
         destacado: false,
         fecha: "2025-05-26",
         fechaDisponible: "2025-05-26T19:45:00-06:00", // México timezone
-        portada: "img/thumbnail-placeholder.jpg",
-        views: 0,
-        esNuevo: true
-    },
-    {
-        id: 10,
-        titulo: "¡Nohara-kun conoce a Action Mask!",
-        descripcion: "Shin-chan tiene la oportunidad de conocer a su héroe favorito, Action Mask, en persona. ¿Qué aventuras vivirán juntos? ¡No te lo pierdas!",
-        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_10]",
-        destacado: false,
-        fecha: "2025-05-27",
-        fechaDisponible: "2025-05-27T21:15:00-06:00", // México timezone
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/Volveracasa.png",
         views: 0,
         esNuevo: true
     }
