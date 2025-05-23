@@ -19,6 +19,36 @@ const episodios = [
         fecha: "2025-05-23",
         portada: "img/thumbnail-placeholder.jpg",
         views: 0
+    },
+    {
+        id: 3,
+        titulo: "¡El puente colgante es emocionante!",
+        descripcion: "Despeus de que AI-Chan intento enamorar varias a shin-chan, y no les funciono. Ahora tras que le dieran una idea decide invitar a shin-chan, pero van todos los amigos. y cruzaran por varios puentes, ¿Que sucederá?",
+        url: "https://www.dailymotion.com/embed/video/k1hc5AwhoLkEg4D6Gky",
+        destacado: true,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
+    },
+    {
+        id: 4,
+        titulo: "El monstruo gigante está aquí.",
+        descripcion: "Semashi, fue con su familia a un parque de atracciones especialmente por una atracción pero resulto que estaba en mantenimiento, asi que sin mas opcion va a la casa de la familia nohara, en donde a Hiroshi se le ocurre la idea de recrear la atraccion. haran un escenario en el parque, pero ¿Que continuara?",
+        url: "https://www.dailymotion.com/embed/video/k4s3EgDa3As9oAD6GuM",
+        destacado: true,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
+    },
+    {
+        id: 5,
+        titulo: "¡Vamos al parque público!",
+        descripcion: "Shin chan y sus amigos van al parque junto con sus compañeros de clase, pero no es un parque comun, es un parque para que aprendan a conducir correctamente. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k4qzHnKnLlIenTD6Gvo",
+        destacado: true,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
     }
 ];
 
