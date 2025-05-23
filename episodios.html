@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Episodios - JoshuaSubs</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,16 +18,15 @@
                     <h1>🎌 JoshuaSubs</h1>
                     <span class="tagline">Shin Chan en Español</span>
                 </div>
-                <ul class="nav-menu">
+                <!-- Navegación desktop -->
+                <ul class="nav-menu desktop-only">
                     <li><a href="index.html" class="nav-link">🏠 Inicio</a></li>
                     <li><a href="episodios.html" class="nav-link active">🎬 Episodios</a></li>
                     <li><a href="acerca.html" class="nav-link">👤 Acerca</a></li>
+                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar página">
+                        <i class="fas fa-sync-alt"></i> <span>Actualizar</span>
+                    </button></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
         </nav>
     </header>
@@ -34,12 +34,12 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>🎬 Catálogo de Episodios</h1>
-            <p>Todos los episodios de Shin Chan disponibles</p>
+            <h1>🎬 Todos los Episodios</h1>
+            <p>Explora nuestra colección completa de episodios subtitulados</p>
         </div>
     </section>
 
-    <!-- Filtros -->
+    <!-- Filters Section -->
     <section class="filters-section">
         <div class="container">
             <div class="filters">
@@ -48,18 +48,25 @@
                 <button class="filter-btn" data-filter="nuevo">🆕 Nuevos</button>
             </div>
             <div class="sort-options">
+                <label for="sortSelect">Ordenar por:</label>
                 <select id="sortSelect" class="sort-select">
-                    <option value="newest">🗓️ Más Recientes</option>
-                    <option value="oldest">📅 Más Antiguos</option>
-                    <option value="title">🔤 Por Título</option>
+                    <option value="newest">📅 Más recientes</option>
+                    <option value="oldest">📅 Más antiguos</option>
+                    <option value="title">🔤 Título A-Z</option>
                 </select>
             </div>
         </div>
     </section>
 
-    <!-- Episodios Grid -->
+    <!-- Episodes Catalog -->
     <section class="episodes-catalog">
         <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📚 Catálogo Completo</h2>
+                <button class="section-refresh-btn" onclick="refreshSection('all')" title="Actualizar catálogo">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
             <div class="episodes-grid" id="allEpisodes">
                 <!-- Los episodios se cargarán aquí -->
             </div>
@@ -69,19 +76,32 @@
     <!-- Modal para reproducir episodios -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Título del Episodio</h3>
-                <button class="close-btn" onclick="closeModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="video-container">
-                    <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
+            <!-- El contenido se genera dinámicamente -->
         </div>
     </div>
+
+    <!-- Bottom Navigation para Móvil -->
+    <nav class="bottom-nav mobile-only">
+        <a href="index.html" class="bottom-nav-item" data-page="inicio">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="episodios.html" class="bottom-nav-item active" data-page="episodios">
+            <i class="fas fa-film"></i>
+            <span>Episodios</span>
+        </a>
+        <button class="bottom-nav-item refresh-nav-btn" onclick="smartRefresh()" data-page="refresh">
+            <i class="fas fa-sync-alt"></i>
+            <span>Actualizar</span>
+        </button>
+        <a href="acerca.html" class="bottom-nav-item" data-page="acerca">
+            <i class="fas fa-user"></i>
+            <span>Acerca</span>
+        </a>
+    </nav>
+
+    <!-- Spacer para bottom navigation -->
+    <div class="bottom-nav-spacer mobile-only"></div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -90,12 +110,14 @@
                 <div class="footer-section">
                     <h3>JoshuaSubs</h3>
                     <p>Subtítulos de calidad para Shin Chan</p>
+                    <p class="last-updated">Última actualización: <span id="lastUpdate">Cargando...</span></p>
                 </div>
                 <div class="footer-section">
                     <h4>Enlaces</h4>
                     <ul>
                         <li><a href="#">📱 Canal de Telegram</a></li>
                         <li><a href="acerca.html">👤 Sobre Joshua Plata</a></li>
+                        <li><button onclick="forceRefresh()" class="footer-refresh">🔄 Forzar Actualización</button></li>
                     </ul>
                 </div>
             </div>
@@ -107,5 +129,6 @@
 
     <script src="js/episodios.js"></script>
     <script src="js/episodios-page.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
