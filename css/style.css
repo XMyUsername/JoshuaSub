@@ -1701,3 +1701,6 @@ html {
         height: calc(80px + env(safe-area-inset-bottom));
     }
 }
+
+
+@import url('css/bottom-navigation.css');
