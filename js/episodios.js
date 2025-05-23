@@ -49,6 +49,16 @@ const episodios = [
         fecha: "2025-05-23",
         portada: "img/thumbnail-placeholder.jpg",
         views: 0
+    },
+    {
+        id: 6,
+        titulo: "¡Que juego menko con papá!",
+        descripcion: "Misae le pregunta a Hiroshi por el purificador de aire, asi que hiroshi va al armario y empieza a buscar. pero no lo encuentra, poco despues encuentra una caja que contiene un juego de cartas de su padre ginnosuke de akita, ¿Que sucedera a continuación?",
+        url: "https://www.dailymotion.com/embed/video/k12D1wuHhJTkauD6Hqe",
+        destacado: false,
+        fecha: "2025-05-23",
+        portada: "img/thumbnail-placeholder.jpg",
+        views: 0
     }
 ];
 
