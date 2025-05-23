@@ -179,17 +179,28 @@ function closeModal() {
 function setupMobileNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const body = document.body;
     
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        // Click en hamburger
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('🍔 Hamburger clicked'); // Para debug
+            
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             
             // Prevenir scroll cuando el menú está abierto
             if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
+                body.style.overflow = 'hidden';
+                body.style.position = 'fixed';
+                body.style.width = '100%';
             } else {
-                document.body.style.overflow = 'auto';
+                body.style.overflow = '';
+                body.style.position = '';
+                body.style.width = '';
             }
         });
         
@@ -198,17 +209,45 @@ function setupMobileNavigation() {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                body.style.overflow = '';
+                body.style.position = '';
+                body.style.width = '';
             });
         });
         
-        // Cerrar menú al hacer click fuera
-        document.addEventListener('click', function(event) {
-            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+        // Cerrar menú al hacer click fuera (solo en el overlay)
+        navMenu.addEventListener('click', function(e) {
+            if (e.target === navMenu) {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                body.style.overflow = '';
+                body.style.position = '';
+                body.style.width = '';
             }
+        });
+        
+        // Cerrar con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                body.style.overflow = '';
+                body.style.position = '';
+                body.style.width = '';
+            }
+        });
+        
+        // Manejar cambio de orientación
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    body.style.overflow = '';
+                    body.style.position = '';
+                    body.style.width = '';
+                }
+            }, 100);
         });
     }
 }
