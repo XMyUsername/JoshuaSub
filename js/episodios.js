@@ -7,7 +7,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/kX8AzsLZSFBgJtD6nek",
         destacado: true,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/Espacial.png",
         views: 0
     },
     {
@@ -17,7 +17,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k7A3l0b3o58VRoD6np4",
         destacado: true,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/Espacial2.png",
         views: 0
     },
     {
@@ -27,7 +27,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k1hc5AwhoLkEg4D6Gky",
         destacado: true,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/PuenteColgante.png",
         views: 0
     },
     {
@@ -37,7 +37,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k4s3EgDa3As9oAD6GuM",
         destacado: true,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/MounstroGigante.png",
         views: 0
     },
     {
@@ -47,7 +47,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k4qzHnKnLlIenTD6Gvo",
         destacado: true,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/ParquePublico.png",
         views: 0
     },
     {
@@ -57,7 +57,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k12D1wuHhJTkauD6Hqe",
         destacado: false,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/Menko.png",
         views: 0
     },
     {
@@ -67,7 +67,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
         destacado: false,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/4DEnCasa.png",
         views: 0
     },
     {
@@ -77,7 +77,7 @@ const episodios = [
         url: "https://www.dailymotion.com/embed/video/k39ikjsP00ZMnYD6Iqy",
         destacado: false,
         fecha: "2025-05-23",
-        portada: "img/thumbnail-placeholder.jpg",
+        portada: "img/Castillo.png",
         views: 0
     }
 ];
