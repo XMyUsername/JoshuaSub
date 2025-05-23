@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEpisodesPage();
     setupFilters();
     setupSort();
+    setupBottomNavigation(); // Agregar esta línea
 });
 
 let currentFilter = 'all';
@@ -188,6 +189,7 @@ function openEpisodeModal(episodeId) {
     `;
     
     modal.style.display = 'block';
+    document.body.classList.add('modal-open');
     
     // Incrementar contador de vistas
     incrementViews(episodeId);
@@ -203,12 +205,10 @@ function closeModal() {
     const modal = document.getElementById('videoModal');
     const videoFrame = document.getElementById('videoFrame');
     
-    // 🔥 SOLUCIÓN: Detener completamente el video
+    // Detener completamente el video
     if (videoFrame) {
-        // Método 1: Eliminar completamente el src
         videoFrame.src = 'about:blank';
         
-        // Método 2: Como respaldo, también remover el iframe
         setTimeout(() => {
             const videoContainer = videoFrame.parentElement;
             if (videoContainer) {
@@ -218,6 +218,7 @@ function closeModal() {
     }
     
     modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
     
     // Restaurar scroll del body
     document.body.style.overflow = 'auto';
@@ -239,33 +240,6 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();
-    }
-});
-
-// 🔥 NUEVA FUNCIÓN: Detener video si el usuario navega o recarga
-window.addEventListener('beforeunload', function() {
-    const videoFrame = document.getElementById('videoFrame');
-    if (videoFrame) {
-        videoFrame.src = 'about:blank';
-    }
-});
-
-// 🔥 NUEVA FUNCIÓN: Detener video si se pierde el foco de la página
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        const modal = document.getElementById('videoModal');
-        if (modal && modal.style.display === 'block') {
-            // Pausar el video cuando la página no está visible
-            const videoFrame = document.getElementById('videoFrame');
-            if (videoFrame && videoFrame.src !== 'about:blank') {
-                // Enviar mensaje de pausa al iframe (funciona con algunos reproductores)
-                try {
-                    videoFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                } catch (e) {
-                    // Si no funciona, no pasa nada
-                }
-            }
-        }
     }
 });
 
