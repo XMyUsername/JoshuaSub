@@ -219,18 +219,15 @@ class GlobalViewsManager {
         const baseViews = {};
         episodios.forEach((ep, index) => {
             if (ep.fechaDisponible && !isEpisodeAvailable(ep)) {
-                baseViews[ep.id] = 0; // No tiene vistas si no está disponible
+                baseViews[ep.id] = 0;
             } else {
-                // 🔥 MODIFICADO: Generar vistas de 10,000+ con variación
-                baseViews[ep.id] = Math.floor(Math.random() * (5000)) + (10000 + index * 100);
+                baseViews[ep.id] = Math.floor(Math.random() * 5000) + (10000 + index * 100);
             }
         });
-
-        const timeBonus = Math.floor(Date.now() / 1000000) % 250; // Aumentar bonus
+        const timeBonus = Math.floor(Date.now() / 1000000) % 250;
         Object.keys(baseViews).forEach(id => {
             baseViews[id] += timeBonus;
         });
-
         return baseViews;
     }
 
@@ -238,12 +235,12 @@ class GlobalViewsManager {
         if (!this.fallbackData) {
             this.fallbackData = {};
             episodios.forEach((ep, index) => {
-                // 🔥 MODIFICADO: Usar vistas de 10,000+ desde el episodio
                 this.fallbackData[ep.id] = ep.views || (10000 + (200 - index * 20));
             });
         }
         return this.fallbackData;
     }
+
 
     async incrementGlobalView(episodeId) {
         const episode = getEpisodeById(episodeId);
@@ -254,11 +251,9 @@ class GlobalViewsManager {
         try {
             const currentViews = await this.getGlobalViews();
             currentViews[episodeId] = (currentViews[episodeId] || 10000) + 1;
-            
             const localViews = this.getLocalViews();
             localViews[episodeId] = (localViews[episodeId] || 10000) + 1;
             localStorage.setItem('localViews', JSON.stringify(localViews));
-            
             return currentViews[episodeId];
         } catch (error) {
             console.log('Error al incrementar vista global:', error);
@@ -271,6 +266,11 @@ class GlobalViewsManager {
         localViews[episodeId] = (localViews[episodeId] || 10000) + 1;
         localStorage.setItem('localViews', JSON.stringify(localViews));
         return localViews[episodeId];
+    }
+
+    function formatViews(views) {
+        if (views >= 10000) return Math.floor(views / 1000) + 'K+';
+        return views.toLocaleString();
     }
 
     getLocalViews() {
@@ -636,8 +636,7 @@ function updateTotalViews() {
     const totalViewsElement = document.getElementById('totalViews');
     if (totalViewsElement) {
         const totalViews = getTotalViews();
-        // 🔥 MODIFICADO: Usar formato con K+ para totales grandes
-        totalViewsElement.textContent = totalViews >= 10000 ? `${Math.floor(totalViews / 1000)}K+` : totalViews.toLocaleString();
+        totalViewsElement.textContent = totalViews >= 10000 ? formatViews(totalViews) : totalViews.toLocaleString();
     }
     
     const aboutTotalViewsElement = document.getElementById('aboutTotalViews');
