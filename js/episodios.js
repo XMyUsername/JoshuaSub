@@ -4,61 +4,61 @@ const episodios = [
     {
         id: 1,
         titulo: "¡Somos la familia espacial Nohara - Parte 1!",
-        descripcion: "La familia Nohara estaba en una demostración de guerra en el espacio, cuando se quedan sin batería. Y ponen a recargar el carro en un planeta cercano cuando les llega una señal de Ginnosuke cercana, ¿Qué sucederá?",
+        descripcion: "La familia Nohara estaba en una demostración de guerra en el espacio, cuando se quedan sin batería. Y ponen a recargar el carro en un planeta cercano cuando les llega una señal de socorro de algunos alienígenas, los cuales han sido atacados por una raza alienígena malévola.",
         url: "https://www.dailymotion.com/embed/video/kX8AzsLZSFBgJtD6nek",
         destacado: true,
         fecha: "2025-01-15",
         fechaDisponible: null, // Ya disponible
         portada: "img/Espacial.png",
-        views: 234,
+        views: 12344,
         esNuevo: false
     },
     {
         id: 2,
         titulo: "¡Somos la familia espacial Nohara - Parte 2!",
-        descripcion: "Ahora Ginnosuke la lió robándose una piedra y removiéndola de su lugar, lo que ha generado una incertidumbre entre los habitantes de ese planeta, ya que la piedra parecía ser para que no saliera un monstruo llamado Anaya-chan, pero.. ¿Qué sucederá?",
+        descripcion: "Ahora Ginnosuke la lió robándose una piedra y removiéndola de su lugar, lo que ha generado una incertidumbre entre los habitantes de ese planeta, ya que la piedra parecía ser sagrada y ahora el planeta está perdiendo su energía vital.",
         url: "https://www.dailymotion.com/embed/video/k7A3l0b3o58VRoD6np4",
         destacado: true,
         fecha: "2025-01-20",
         fechaDisponible: null, // Ya disponible
         portada: "img/Espacial2.png",
-        views: 189,
+        views: 11589,
         esNuevo: false
     },
     {
         id: 3,
         titulo: "¡El puente colgante es emocionante!",
-        descripcion: "Después de que AI-Chan intentó enamorar varias a Shin-chan, y no les funcionó. Ahora tras que le dieran una idea decide invitar a Shin-chan, pero van todos los amigos. Y cruzan un puente colgante emocionante.",
+        descripcion: "Después de que AI-Chan intentó enamorar varias a Shin-chan, y no les funcionó. Ahora tras que le dieran una idea decide invitar a Shin-chan, pero van todos los amigos. Y como siempre Shin-chan hace de las suyas en el puente colgante.",
         url: "https://www.dailymotion.com/embed/video/k1hc5AwhoLkEg4D6Gky",
         destacado: true,
         fecha: "2025-02-01",
         fechaDisponible: null, // Ya disponible
         portada: "img/PuenteColgante.png",
-        views: 156,
+        views: 10856,
         esNuevo: false
     },
     {
         id: 4,
         titulo: "El monstruo gigante está aquí.",
-        descripcion: "Semashi, fue con su familia a un parque de atracciones especialmente por una atracción pero resultó que estaba en mantenimiento, así que sin más opción va a la casa de la familia Nohara.",
+        descripcion: "Semashi, fue con su familia a un parque de atracciones especialmente por una atracción pero resultó que estaba en mantenimiento, así que sin más opción va a la casa de los Nohara donde Shin-chan le contará una historia de monstruos.",
         url: "https://www.dailymotion.com/embed/video/k4s3EgDa3As9oAD6GuM",
         destacado: true,
         fecha: "2025-02-10",
         fechaDisponible: null, // Ya disponible
         portada: "img/MounstroGigante.png",
-        views: 143,
+        views: 10243,
         esNuevo: false
     },
     {
         id: 5,
         titulo: "¡Vamos al parque público!",
-        descripcion: "Shin chan y sus amigos van al parque junto con sus compañeros de clase, pero no es un parque común, es un parque para que aprendan a conducir correctamente. ¿Qué sucederá?",
+        descripcion: "Shin chan y sus amigos van al parque junto con sus compañeros de clase, pero no es un parque común, es un parque para que aprendan a conducir correctamente. ¿Qué sucederá cuando Shin-chan tome el volante?",
         url: "https://www.dailymotion.com/embed/video/k4qzHnKnLlIenTD6Gvo",
         destacado: true,
         fecha: "2025-02-15",
         fechaDisponible: null, // Ya disponible
         portada: "img/ParquePublico.png",
-        views: 98,
+        views: 10098,
         esNuevo: false
     },
     {
@@ -70,7 +70,7 @@ const episodios = [
         fecha: "2025-05-23",
         fechaDisponible: null, // Ya disponible
         portada: "img/Menko.png",
-        views: 0,
+        views: 15420,
         esNuevo: true
     },
     {
@@ -82,19 +82,19 @@ const episodios = [
         fecha: "2025-05-24",
         fechaDisponible: null, // Ya disponible
         portada: "img/Castillo.png",
-        views: 0,
+        views: 12890,
         esNuevo: true
     },
     {
         id: 8,
         titulo: "¡4D en casa!",
-        descripcion: "Hiroshi, junto con su compañero kawaguchi hiban a ir a ver una pelicula 4D. pero hiroshi se olvido de comprar las entradas asi que no pudo, llamo a misae diciendo que no pudo ver la pelicula, entonces misae en secreto hara una experiencia 4D de la pelicula junto con shin-chan y hima. ¿Que sucedera?",
+        descripcion: "Hiroshi, junto con su compañero kawaguchi hiban a ir a ver una pelicula 4D. pero hiroshi se olvido de comprar las entradas asi que no pudo, llamo a misae diciendo que no pudo ir. ¿Que sucedera?",
         url: "https://www.dailymotion.com/embed/video/k6zGZgLXfVzXxeD6HDs",
         destacado: false,
         fecha: "2025-05-25",
         fechaDisponible: null, // ✅ Corregido: null en lugar de Null
         portada: "img/4DEnCasa.png",
-        views: 0,
+        views: 11234,
         esNuevo: true
     },
     {
@@ -106,7 +106,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/OB.png",
-        views: 0,
+        views: 10567,
         esNuevo: false
     },
     {
@@ -118,7 +118,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/AutobusDestino.png",
-        views: 0,
+        views: 10123,
         esNuevo: false
     },
     {
@@ -130,7 +130,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/BuenaSuerteNevado.png",
-        views: 0,
+        views: 10456,
         esNuevo: false
     },
     {
@@ -142,7 +142,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/AterradoraHistoriaMasao.png",
-        views: 0,
+        views: 10789,
         esNuevo: false
     },
     {
@@ -154,7 +154,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/PapaDiasFrios.png",
-        views: 0,
+        views: 10234,
         esNuevo: false
     },
     {
@@ -166,7 +166,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/LaAventuraCerditoValiente.png",
-        views: 0,
+        views: 10678,
         esNuevo: false
     },
     {
@@ -178,7 +178,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/Desfiledemoda.png",
-        views: 0,
+        views: 10345,
         esNuevo: false
     }
 ];
@@ -221,11 +221,12 @@ class GlobalViewsManager {
             if (ep.fechaDisponible && !isEpisodeAvailable(ep)) {
                 baseViews[ep.id] = 0; // No tiene vistas si no está disponible
             } else {
-                baseViews[ep.id] = Math.floor(Math.random() * (500 - index * 50)) + (150 - index * 20);
+                // 🔥 MODIFICADO: Generar vistas de 10,000+ con variación
+                baseViews[ep.id] = Math.floor(Math.random() * (5000)) + (10000 + index * 100);
             }
         });
 
-        const timeBonus = Math.floor(Date.now() / 1000000) % 50;
+        const timeBonus = Math.floor(Date.now() / 1000000) % 250; // Aumentar bonus
         Object.keys(baseViews).forEach(id => {
             baseViews[id] += timeBonus;
         });
@@ -237,7 +238,8 @@ class GlobalViewsManager {
         if (!this.fallbackData) {
             this.fallbackData = {};
             episodios.forEach((ep, index) => {
-                this.fallbackData[ep.id] = ep.views || (200 - index * 20);
+                // 🔥 MODIFICADO: Usar vistas de 10,000+ desde el episodio
+                this.fallbackData[ep.id] = ep.views || (10000 + (200 - index * 20));
             });
         }
         return this.fallbackData;
@@ -251,10 +253,10 @@ class GlobalViewsManager {
 
         try {
             const currentViews = await this.getGlobalViews();
-            currentViews[episodeId] = (currentViews[episodeId] || 0) + 1;
+            currentViews[episodeId] = (currentViews[episodeId] || 10000) + 1;
             
             const localViews = this.getLocalViews();
-            localViews[episodeId] = (localViews[episodeId] || 0) + 1;
+            localViews[episodeId] = (localViews[episodeId] || 10000) + 1;
             localStorage.setItem('localViews', JSON.stringify(localViews));
             
             return currentViews[episodeId];
@@ -266,7 +268,7 @@ class GlobalViewsManager {
 
     incrementLocalView(episodeId) {
         const localViews = this.getLocalViews();
-        localViews[episodeId] = (localViews[episodeId] || 0) + 1;
+        localViews[episodeId] = (localViews[episodeId] || 10000) + 1;
         localStorage.setItem('localViews', JSON.stringify(localViews));
         return localViews[episodeId];
     }
@@ -289,8 +291,8 @@ class GlobalViewsManager {
             const combinedViews = { ...globalViews };
             Object.keys(localViews).forEach(id => {
                 combinedViews[id] = Math.max(
-                    combinedViews[id] || 0,
-                    localViews[id] || 0
+                    combinedViews[id] || 10000,
+                    localViews[id] || 10000
                 );
             });
 
@@ -622,15 +624,26 @@ function getTotalViews() {
     }, 0);
 }
 
+// 🔥 MODIFICADO: Función para formatear vistas con formato 10K+
+function formatViews(views) {
+    if (views >= 10000) {
+        return `${Math.floor(views / 1000)}K+`;
+    }
+    return views.toLocaleString();
+}
+
 function updateTotalViews() {
     const totalViewsElement = document.getElementById('totalViews');
     if (totalViewsElement) {
-        totalViewsElement.textContent = getTotalViews().toLocaleString();
+        const totalViews = getTotalViews();
+        // 🔥 MODIFICADO: Usar formato con K+ para totales grandes
+        totalViewsElement.textContent = totalViews >= 10000 ? `${Math.floor(totalViews / 1000)}K+` : totalViews.toLocaleString();
     }
     
     const aboutTotalViewsElement = document.getElementById('aboutTotalViews');
     if (aboutTotalViewsElement) {
-        aboutTotalViewsElement.textContent = getTotalViews().toLocaleString();
+        const totalViews = getTotalViews();
+        aboutTotalViewsElement.textContent = totalViews >= 10000 ? `${Math.floor(totalViews / 1000)}K+` : totalViews.toLocaleString();
     }
     
     const modalViews = document.getElementById('modalViews');
@@ -638,7 +651,8 @@ function updateTotalViews() {
         const currentEpisodeId = parseInt(modalViews.dataset.episodeId);
         const episode = getEpisodeById(currentEpisodeId);
         if (episode) {
-            modalViews.textContent = `${episode.views.toLocaleString()} visualizaciones`;
+            // 🔥 MODIFICADO: Usar formato K+ para vistas individuales
+            modalViews.textContent = `${formatViews(episode.views)} visualizaciones`;
         }
     }
 }
