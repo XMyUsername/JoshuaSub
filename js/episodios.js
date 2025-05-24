@@ -99,15 +99,87 @@ const episodios = [
     },
     {
         id: 9,
-        titulo: "No puedo volver a casa fácilmente",
-        descripcion: "No disponible",
-        url: "https://www.dailymotion.com/embed/video/[URL_DEL_EPISODIO_9]",
+        titulo: "¡Voy a ser un OB!",
+        descripcion: "Mientras shin-chan y sus amigos ven la tele, ven un programa de chicos OLD BOY asi que deciden salir a jugar al parque, en donde anteriormente shin chan ya habia ido. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k2NLx34TS7IDOOD6KCa",
         destacado: false,
-        fecha: "2025-05-26",
-        fechaDisponible: "2025-05-26T19:45:00-06:00", // México timezone - Mañana 19:45
-        portada: "img/Volveracasa.png",
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/OB.png",
         views: 0,
-        esNuevo: true
+        esNuevo: false
+    },
+    {
+        id: 10,
+        titulo: "Un autobús con destino desconocido..",
+        descripcion: "Shin-chan sale de su casa, cuando de pronto llega el autobus de la guarderia. shin chan por curiosidad ve la ventana y ve a kazama ademas de justo abrirse la puerta del autobus.. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k6gHQ7JMV0LTPuD6KCu",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/AutobusDestino.png",
+        views: 0,
+        esNuevo: false
+    },
+    {
+        id: 11,
+        titulo: "Buena suerte, Nevado..",
+        descripcion: "Misae, le dice a shin-chan que salga a pasear al perro. shin-chan no tiene otra mas que hacerlo, asi que decide ir al parque de perros pero justo se encuentra con masao.. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k2zgR6bfksoGdwD6KCK",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/BuenaSuerteNevado.png",
+        views: 0,
+        esNuevo: false
+    },
+    {
+        id: 12,
+        titulo: "La aterradora historia de Masao.",
+        descripcion: "Masao, se encuentra leyendo un cuento de terror. pero le dio demasiado miedo.. asi que decidio invitar a sus amigos a su casa para contarles el cuento. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/kQysloFbSe5WoqD6KD0",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/AterradoraHistoriaMasao.png",
+        views: 0,
+        esNuevo: false
+    },
+    {
+        id: 13,
+        titulo: "Papá en los días fríos",
+        descripcion: "Hiroshi nota el frio vigorizante, asi que le dice a shin-chan que deberia salir alguna vez con este frio, pero shin-chan no quiere. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k7cZ0trGBl0rhLD6KDg",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/PapaDiasFrios.png",
+        views: 0,
+        esNuevo: false
+    },
+    {
+        id: 14,
+        titulo: "La aventura del tesoro del cerdito valiente",
+        descripcion: "Shin-Chan un vagabundo, quiere alojarse en algun lado. pero no tiene suficiente dinero. asi que decide invocar a el cerdito valiente ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k3pKpeDRZ9bYYmD6KDm",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/LaAventuraCerditoValiente.png",
+        views: 0,
+        esNuevo: false
+    },
+    {
+        id: 15,
+        titulo: "Desfile de moda en la guarderia!",
+        descripcion: "Hoy en la guarderia hay reciclaje asi que los niños pueden experimentar con las cosas recicladas, cuando justo se les ocurre la idea de un desfile de moda. ¿Que sucedera?",
+        url: "https://www.dailymotion.com/embed/video/k3fCwz9yhfTPMCD6KDC",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/Desfiledemoda.png",
+        views: 0,
+        esNuevo: false
     }
 ];
 
