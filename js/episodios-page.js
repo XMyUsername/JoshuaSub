@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEpisodesPage();
     setupFilters();
     setupSort();
-    setupBottomNavigation();
-    startCountdownUpdates(); // ✅ AGREGAR: Iniciar sistema de countdown
+    setupBottomNavigation(); // Agregar esta línea
 });
 
 let currentFilter = 'all';
@@ -36,12 +35,7 @@ function loadAllEpisodes() {
     }
     
     episodes.forEach(episode => {
-        // ✅ CAMBIO: Usar createNewEpisodeCard si es nuevo para incluir countdown
-        if (episode.esNuevo) {
-            container.appendChild(createNewEpisodeCard(episode));
-        } else {
-            container.appendChild(createEpisodeCard(episode));
-        }
+        container.appendChild(createEpisodeCard(episode));
     });
     
     // Activar animaciones
@@ -60,7 +54,7 @@ function filterEpisodes(episodes, filter) {
         case 'destacado':
             return episodes.filter(ep => ep.destacado);
         case 'nuevo':
-            return episodes.filter(ep => ep.esNuevo); // ✅ CAMBIO: Usar esNuevo en lugar de isNewEpisode
+            return episodes.filter(ep => isNewEpisode(ep.fecha));
         default:
             return episodes;
     }
@@ -109,31 +103,19 @@ function setupSort() {
     }
 }
 
-// ✅ NUEVA: Función para crear tarjetas normales sin countdown
 function createEpisodeCard(episode) {
     const card = document.createElement('div');
-    const isAvailable = isEpisodeAvailable(episode);
-    
-    // Determinar clases CSS
-    let cardClasses = 'episode-card';
-    if (!isAvailable) {
-        cardClasses += ' not-available';
-    }
-    
-    card.className = cardClasses;
+    card.className = 'episode-card';
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    card.setAttribute('data-episode-id', episode.id);
     
     const isNew = isNewEpisode(episode.fecha);
     let badgeHTML = '';
     
-    if (!isAvailable) {
-        badgeHTML = '<div class="episode-badge badge-coming-soon">⏰ Próximamente</div>';
-    } else if (episode.destacado) {
+    if (episode.destacado) {
         badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
-    } else if (isNew || episode.esNuevo) {
+    } else if (isNew) {
         badgeHTML = '<div class="episode-badge badge-new">🆕 Nuevo</div>';
     }
     
@@ -141,7 +123,6 @@ function createEpisodeCard(episode) {
         <div class="episode-image">
             ${badgeHTML}
             <img src="${episode.portada}" alt="${episode.titulo}" onerror="this.style.display='none';">
-            ${!isAvailable ? '<div class="image-overlay"></div>' : ''}
         </div>
         <div class="episode-content">
             <h3 class="episode-title">${episode.titulo}</h3>
@@ -150,9 +131,8 @@ function createEpisodeCard(episode) {
                 <div class="episode-date">${formatDate(episode.fecha)}</div>
                 <div class="episode-views">👀 ${episode.views.toLocaleString()}</div>
             </div>
-            <button class="play-btn" onclick="${isAvailable ? `openEpisodeModal(${episode.id})` : 'showNotAvailableMessage()'}" ${!isAvailable ? 'disabled' : ''}>
-                <i class="fas fa-${isAvailable ? 'play' : 'lock'}"></i> 
-                ${isAvailable ? 'Ver Episodio' : 'No Disponible'}
+            <button class="play-btn" onclick="openEpisodeModal(${episode.id})">
+                <i class="fas fa-play"></i> Ver Episodio
             </button>
         </div>
     `;
@@ -160,20 +140,9 @@ function createEpisodeCard(episode) {
     return card;
 }
 
-// ✅ NUEVA: Función para mostrar mensaje de no disponible
-function showNotAvailableMessage() {
-    showToast('⏰ Este episodio estará disponible pronto. ¡Mantente atento!', 'info');
-}
-
 function openEpisodeModal(episodeId) {
     const episode = getEpisodeById(episodeId);
     if (!episode) return;
-    
-    // ✅ AGREGAR: Verificar disponibilidad
-    if (!isEpisodeAvailable(episode)) {
-        showNotAvailableMessage();
-        return;
-    }
     
     const modal = document.getElementById('videoModal');
     const modalContent = modal.querySelector('.modal-content');
@@ -260,45 +229,6 @@ function closeModal() {
     }, 500);
 }
 
-// ✅ NUEVA: Función para actualizar countdown en página de episodios
-function updateCountdownDisplay(episodeId) {
-    const episode = getEpisodeById(episodeId);
-    if (!episode) return;
-    
-    const countdownElement = document.querySelector(`[data-episode-id="${episodeId}"] .countdown-overlay`);
-    if (!countdownElement) return;
-    
-    const timeLeft = getTimeUntilAvailable(episode);
-    if (!timeLeft) {
-        // Episodio disponible, recargar la página
-        loadAllEpisodes();
-        return;
-    }
-    
-    let countdownText = '';
-    if (timeLeft.days > 0) {
-        countdownText = `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m`;
-    } else if (timeLeft.hours > 0) {
-        countdownText = `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
-    } else {
-        countdownText = `${timeLeft.minutes}m ${timeLeft.seconds}s`;
-    }
-    
-    countdownElement.querySelector('.countdown-time').textContent = countdownText;
-}
-
-// ✅ NUEVA: Sistema de countdown automático para episodios
-function startCountdownUpdates() {
-    setInterval(() => {
-        const allEpisodes = getAllEpisodes();
-        allEpisodes.forEach(episode => {
-            if (!isEpisodeAvailable(episode)) {
-                updateCountdownDisplay(episode.id);
-            }
-        });
-    }, 1000); // Actualizar cada segundo
-}
-
 // Event listeners para cerrar modal
 window.addEventListener('click', function(event) {
     const modal = document.getElementById('videoModal');
@@ -310,33 +240,6 @@ window.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeModal();
-    }
-});
-
-// 🔥 NUEVA FUNCIÓN: Detener video si el usuario navega o recarga
-window.addEventListener('beforeunload', function() {
-    const videoFrame = document.getElementById('videoFrame');
-    if (videoFrame) {
-        videoFrame.src = 'about:blank';
-    }
-});
-
-// 🔥 NUEVA FUNCIÓN: Detener video si se pierde el foco de la página
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        const modal = document.getElementById('videoModal');
-        if (modal && modal.style.display === 'block') {
-            // Pausar el video cuando la página no está visible
-            const videoFrame = document.getElementById('videoFrame');
-            if (videoFrame && videoFrame.src !== 'about:blank') {
-                // Enviar mensaje de pausa al iframe (funciona con algunos reproductores)
-                try {
-                    videoFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                } catch (e) {
-                    // Si no funciona, no pasa nada
-                }
-            }
-        }
     }
 });
 
