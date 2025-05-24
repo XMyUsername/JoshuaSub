@@ -10,6 +10,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- 🔥 NUEVO: Anuncio de Shin Chan - Solo visible en PC -->
+    <div class="shinchan-announcement desktop-only" id="shinChanAd">
+        <button class="shinchan-close" onclick="closeShinChanAd()" title="Cerrar anuncio">×</button>
+        
+        <div class="shinchan-header">
+            <h3>¡Nuevos Episodios!</h3>
+        </div>
+        
+        <div class="shinchan-content">
+            <div class="shinchan-image">
+                <img src="img/Shinchan_Cadafindesemana.png" alt="Shin Chan - Fin de Semana">
+            </div>
+            
+            <p class="shinchan-text">
+                ¡Cada fin de semana tendrás nuevos episodios de Shin Chan con subtítulos de calidad!
+            </p>
+            
+            <div class="shinchan-schedule">
+                📅 Sábados y Domingos<br>
+                🎌 ¡No te los pierdas!
+            </div>
+        </div>
+    </div>
+
     <!-- Header Simplificado para Móvil -->
     <header class="header">
         <nav class="navbar">
@@ -150,5 +174,46 @@
     <!-- Scripts -->
     <script src="js/episodios.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- 🔥 NUEVO: Script para el anuncio de Shin Chan -->
+    <script>
+        // Función para cerrar el anuncio de Shin Chan
+        function closeShinChanAd() {
+            const ad = document.getElementById('shinChanAd');
+            if (ad) {
+                ad.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    ad.style.display = 'none';
+                    localStorage.setItem('shinChanAdClosed', 'true');
+                }, 300);
+            }
+        }
+
+        // Mostrar el anuncio solo si no ha sido cerrado antes
+        document.addEventListener('DOMContentLoaded', function() {
+            const adClosed = localStorage.getItem('shinChanAdClosed');
+            const ad = document.getElementById('shinChanAd');
+            
+            if (!adClosed && ad) {
+                // Mostrar el anuncio después de 3 segundos
+                setTimeout(() => {
+                    ad.style.display = 'block';
+                    ad.style.animation = 'fadeIn 0.5s ease forwards';
+                }, 3000);
+            } else if (ad) {
+                ad.style.display = 'none';
+            }
+        });
+
+        // Animación de fadeOut
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(-50%) scale(1); }
+                to { opacity: 0; transform: translateY(-50%) scale(0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
