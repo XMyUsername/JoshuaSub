@@ -10,7 +10,7 @@ const episodios = [
         fecha: "2025-01-15",
         fechaDisponible: null, // Ya disponible
         portada: "img/Espacial.png",
-        views: 12344,
+        views: 0,
         esNuevo: false
     },
     {
@@ -22,7 +22,7 @@ const episodios = [
         fecha: "2025-01-20",
         fechaDisponible: null, // Ya disponible
         portada: "img/Espacial2.png",
-        views: 11589,
+        views: 0,
         esNuevo: false
     },
     {
@@ -34,7 +34,7 @@ const episodios = [
         fecha: "2025-02-01",
         fechaDisponible: null, // Ya disponible
         portada: "img/PuenteColgante.png",
-        views: 10856,
+        views: 0,
         esNuevo: false
     },
     {
@@ -46,7 +46,7 @@ const episodios = [
         fecha: "2025-02-10",
         fechaDisponible: null, // Ya disponible
         portada: "img/MounstroGigante.png",
-        views: 10243,
+        views: 0,
         esNuevo: false
     },
     {
@@ -58,7 +58,7 @@ const episodios = [
         fecha: "2025-02-15",
         fechaDisponible: null, // Ya disponible
         portada: "img/ParquePublico.png",
-        views: 10098,
+        views: 0,
         esNuevo: false
     },
     {
@@ -70,7 +70,7 @@ const episodios = [
         fecha: "2025-05-23",
         fechaDisponible: null, // Ya disponible
         portada: "img/Menko.png",
-        views: 15420,
+        views: 0,
         esNuevo: true
     },
     {
@@ -82,7 +82,7 @@ const episodios = [
         fecha: "2025-05-24",
         fechaDisponible: null, // Ya disponible
         portada: "img/Castillo.png",
-        views: 12890,
+        views: 0,
         esNuevo: true
     },
     {
@@ -94,7 +94,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null, // ✅ Corregido: null en lugar de Null
         portada: "img/4DEnCasa.png",
-        views: 11234,
+        views: 0,
         esNuevo: true
     },
     {
@@ -106,7 +106,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/OB.png",
-        views: 10567,
+        views: 0,
         esNuevo: false
     },
     {
@@ -118,7 +118,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/AutobusDestino.png",
-        views: 10123,
+        views: 0,
         esNuevo: false
     },
     {
@@ -130,7 +130,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/BuenaSuerteNevado.png",
-        views: 10456,
+        views: 0,
         esNuevo: false
     },
     {
@@ -142,7 +142,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/AterradoraHistoriaMasao.png",
-        views: 10789,
+        views: 0,
         esNuevo: false
     },
     {
@@ -154,7 +154,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/PapaDiasFrios.png",
-        views: 10234,
+        views: 0,
         esNuevo: false
     },
     {
@@ -166,7 +166,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/LaAventuraCerditoValiente.png",
-        views: 10678,
+        views: 0,
         esNuevo: false
     },
     {
@@ -178,7 +178,7 @@ const episodios = [
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/Desfiledemoda.png",
-        views: 10345,
+        views: 0,
         esNuevo: false
     }
 ];
@@ -268,7 +268,7 @@ class GlobalViewsManager {
         return localViews[episodeId];
     }
 
-    function formatViews(views) {
+    formatViews(views) {
         if (views >= 10000) return Math.floor(views / 1000) + 'K+';
         return views.toLocaleString();
     }
