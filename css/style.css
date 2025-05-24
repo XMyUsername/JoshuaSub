@@ -1365,3 +1365,62 @@ body {
     color: var(--text-color);
     opacity: 0.7;
 }
+
+/* 🔥 Anuncio Shin Chan */
+.shinchan-announcement {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 280px;
+    background: #fffbe6;
+    border: 2px solid #ff3b30;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(255,59,48,0.15);
+    z-index: 9999;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+}
+.shinchan-announcement-header {
+    background: linear-gradient(90deg, #ff3b30, #32b5ff);
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+}
+.shinchan-announcement-content {
+    padding: 12px;
+    text-align: center;
+}
+.shinchan-announcement img {
+    width: 95%;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(50,50,50,0.13);
+}
+.shinchan-announcement-schedule {
+    background: #fbe6e6;
+    padding: 8px;
+    border-radius: 8px;
+    color: #ff3b30;
+    font-weight: 600;
+    margin-top: 8px;
+    font-size: 0.95em;
+}
+.shinchan-announcement-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: #fff3;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+@media (max-width: 1024px) {
+    .shinchan-announcement { display: none; }
+}
