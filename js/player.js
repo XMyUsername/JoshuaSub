@@ -297,7 +297,7 @@ class VideoPlayer {
         this.updateLikesDisplay(episodeId);
     }
 
-    function shareEpisodePlayer(episodeId) {
+   shareEpisodePlayer(episodeId) {
         if (player && player.currentEpisode) {
            // Usar la función de episodios.js que ya tiene el manejo de errores
            shareEpisode(episodeId);
