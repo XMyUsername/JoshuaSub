@@ -187,9 +187,15 @@ function toggleList(listNumber) {
 function filterEpisodes(episodes, filter) {
     switch (filter) {
         case 'destacado':
-            return episodes.filter(ep => ep.destacado);
+            return episodes.filter(ep => ep.tag === 'destacado');
         case 'nuevo':
-            return episodes.filter(ep => isNewEpisode(ep.fecha));
+            return episodes.filter(ep => ep.tag === 'nuevo');
+        case 'especial':
+            return episodes.filter(ep => ep.tag === 'especial');
+        case 'completo':
+            return episodes.filter(ep => ep.tag === 'completo');
+        case 'antiguo':
+            return episodes.filter(ep => ep.tag === 'antiguo');
         default:
             return episodes;
     }
@@ -252,14 +258,10 @@ function createEpisodeCard(episode) {
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     
-    const isNew = isNewEpisode(episode.fecha);
-    let badgeHTML = '';
-    
-    if (episode.destacado) {
-        badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
-    } else if (isNew) {
-        badgeHTML = '<div class="episode-badge badge-new">🆕 Nuevo</div>';
-    }
+    // Usar el nuevo sistema de tags
+    const tagInfo = getTagInfo(episode.tag);
+    const badgeHTML = episode.tag ? 
+        `<div class="episode-badge ${tagInfo.className}">${tagInfo.label}</div>` : '';
     
     card.innerHTML = `
         <div class="episode-image">
