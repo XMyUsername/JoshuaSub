@@ -21,11 +21,12 @@
 
 .promo-banner {
     width: 100%;
-    height: 136px; /* Altura fija basada en tu banner original */
+    padding-top: 8.3%; /* Proporción basada en 1641x136 (8.3% es aproximadamente la proporción de altura/ancho) */
     background-image: url('../img/Shinchan_Cadafindesemana.png');
-    background-size: cover;
+    background-size: cover; /* Cubre todo el espacio */
     background-position: center;
     background-repeat: no-repeat;
+    animation: bannerFloat 6s ease-in-out infinite;
 }
 
 .promo-banner img {
