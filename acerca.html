@@ -6,27 +6,34 @@
     <title>Acerca de Joshua Plata - JoshuaSubs</title>
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navigation.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Limpio -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
-                <div class="logo">
-                    <h1>🎌 JoshuaSubs</h1>
-                    <span class="tagline">Shin Chan en Español</span>
-                </div>
-                <!-- Navegación desktop -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🎌</div>
+                    <div class="logo-text">
+                        <h1>JoshuaSubs</h1>
+                        <div class="tagline">Shin Chan en Español</div>
+                    </div>
+                </a>
+                
+                <!-- Navegación Desktop -->
                 <ul class="nav-menu desktop-only">
                     <li><a href="index.html" class="nav-link">🏠 Inicio</a></li>
                     <li><a href="episodios.html" class="nav-link">🎬 Episodios</a></li>
                     <li><a href="acerca.html" class="nav-link active">👤 Acerca</a></li>
-                    <li><button class="refresh-btn" onclick="refreshPage()" title="Refrescar página">
-                        <i class="fas fa-sync-alt"></i> <span>Actualizar</span>
-                    </button></li>
                 </ul>
+                
+                <!-- Botón móvil -->
+                <button class="mobile-menu-btn mobile-only">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </nav>
     </header>
