@@ -21,11 +21,11 @@
 
 .promo-banner {
     width: 100%;
-    position: relative;
-    display: block; /* Cambiamos a block */
-    padding: 0;
-    animation: bannerFloat 6s ease-in-out infinite;
-    line-height: 0; /* Elimina espacios extra debajo de la imagen */
+    height: 136px; /* Altura fija basada en tu banner original */
+    background-image: url('../img/Shinchan_Cadafindesemana.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .promo-banner img {
@@ -70,69 +70,21 @@
     }
 }
 
-/* ===================================
-   📱 RESPONSIVE PARA DIFERENTES PANTALLAS
-   =================================== */
-
-/* Tablets grandes y laptops */
 @media (min-width: 1024px) {
-    .promo-banner img {
-        max-width: 1400px;
-        max-height: 200px;
-    }
-    
-    .promo-banner-container {
-        min-height: 220px;
+    .promo-banner {
+        height: 180px;
     }
 }
 
-/* Tablets */
-@media (max-width: 1023px) and (min-width: 768px) {
-    .promo-banner img {
-        max-width: 900px;
-        max-height: 150px;
-    }
-    
-    .promo-banner-container {
-        min-height: 170px;
-    }
-    
+@media (max-width: 767px) {
     .promo-banner {
-        padding: 15px;
+        height: 100px;
     }
 }
 
-/* Móviles grandes */
-@media (max-width: 767px) and (min-width: 480px) {
-    .promo-banner img {
-        max-width: 100%;
-        max-height: 120px;
-        min-height: 80px;
-    }
-    
-    .promo-banner-container {
-        min-height: 140px;
-    }
-    
+@media (max-width: 480px) {
     .promo-banner {
-        padding: 10px;
-    }
-}
-
-/* Móviles pequeños */
-@media (max-width: 479px) {
-    .promo-banner img {
-        max-width: 100%;
-        max-height: 100px;
-        min-height: 60px;
-    }
-    
-    .promo-banner-container {
-        min-height: 120px;
-    }
-    
-    .promo-banner {
-        padding: 8px;
+        height: 80px;
     }
 }
 
