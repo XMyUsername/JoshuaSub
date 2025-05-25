@@ -253,6 +253,19 @@ class GlobalViewsManager {
         return this.fallbackData;
     }
 
+    fallbackShare(shareData) {
+    // Copiar URL al portapapeles como fallback
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareData.url)
+            .then(() => {
+                showToast('📋 URL copiada al portapapeles', 'success');
+            })
+            .catch(() => {
+                console.log('No se pudo copiar al portapapeles');
+            });
+        }
+    }
+
 
     async incrementGlobalView(episodeId) {
         const episode = getEpisodeById(episodeId);
@@ -538,6 +551,19 @@ function getLikes(episodeId) {
     return likesData[episodeId] || { likes: 0, dislikes: 0, userAction: null };
 }
 
+function fallbackShare(shareData) {
+    // Copiar URL al portapapeles como fallback
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareData.url)
+            .then(() => {
+                showToast('📋 URL copiada al portapapeles', 'success');
+            })
+            .catch(() => {
+                console.log('No se pudo copiar al portapapeles');
+            });
+    }
+}
+
 function toggleLike(episodeId) {
     const likesData = JSON.parse(localStorage.getItem('episodeLikes') || '{}');
     if (!likesData[episodeId]) {
@@ -604,17 +630,37 @@ function shareEpisode(episodeId) {
     const episode = getEpisodeById(episodeId);
     if (!episode) return;
     
-    if (navigator.share) {
-        navigator.share({
-            title: episode.titulo,
-            text: episode.descripcion,
-            url: window.location.href
-        });
+    const shareData = {
+        title: episode.titulo,
+        text: `¡Mira "${episode.titulo}" en JoshuaSubs!`,
+        url: `${window.location.origin}/reproductor.html?id=${episodeId}`
+    };
+    
+    // Verificar si ya hay un share en progreso
+    if (window.shareInProgress) {
+        console.log('Share ya en progreso, cancelando...');
+        return;
+    }
+    
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        window.shareInProgress = true;
+        
+        navigator.share(shareData)
+            .then(() => {
+                console.log('✅ Episodio compartido exitosamente');
+                showToast('📤 ¡Episodio compartido!', 'success');
+            })
+            .catch((error) => {
+                console.log('❌ Error al compartir:', error);
+                if (error.name !== 'AbortError') {
+                    fallbackShare(shareData);
+                }
+            })
+            .finally(() => {
+                window.shareInProgress = false;
+            });
     } else {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-            showToast('¡Enlace copiado al portapapeles!', 'success');
-        });
+        fallbackShare(shareData);
     }
 }
 
