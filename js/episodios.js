@@ -197,7 +197,7 @@ const episodios = [
         id: 17,
         titulo: "¡¡Papa va a jugar Golf! - 2 Episodios",
         descripcion: "Hoy misae-san, queria ir junto con hiroshi a hacer la compra. pero no pudo porque tiene que ir a jugar golf con su jefe. ¿Que sucedera?",
-        url: "https://www.dailymotion.com/embed/video/k3vxNwBabe1JYCD7rIC"",
+        url: "https://www.dailymotion.com/embed/video/k3vxNwBabe1JYCD7rIC",
         destacado: true,
         fecha: "2025-05-25",
         fechaDisponible: null,
