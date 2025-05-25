@@ -30,7 +30,7 @@ const episodios = [
         titulo: "¡El puente colgante es emocionante!",
         descripcion: "Después de que AI-Chan intentó enamorar varias a Shin-chan, y no les funcionó. Ahora tras que le dieran una idea decide invitar a Shin-chan, pero van todos los amigos. Y como siempre Shin-chan hace de las suyas en el puente colgante.",
         url: "https://www.dailymotion.com/embed/video/k1hc5AwhoLkEg4D6Gky",
-        destacado: true,
+        destacado: false,
         fecha: "2025-02-01",
         fechaDisponible: null, // Ya disponible
         portada: "img/PuenteColgante.png",
@@ -186,10 +186,22 @@ const episodios = [
         titulo: "¡Masao tiene un calentador de suelo en casa! - 2 Episodios",
         descripcion: "Shin-Chan y sus amigos kazama, nene y bo-chan esperan en el parque a masao. pero como hace mucho frio shin chan decidio ir a por masao-kun en su casa, donde descrube que este tiene un calentador de piso. ¿Que sucedera?",
         url: "https://www.dailymotion.com/embed/video/k42ZQhXLQPdDvjD7aIM",
-        destacado: false,
+        destacado: true,
         fecha: "2025-05-25",
         fechaDisponible: null,
         portada: "img/MasaoTieneUnCalentador.png",
+        views: 0,
+        esNuevo: true
+    },
+    {
+        id: 17,
+        titulo: "¡Papa va a jugar Golf!",
+        descripcion: "Hoy misae-san, queria ir junto con hiroshi a hacer la compra. pero no pudo porque tiene que ir a jugar golf con su jefe. ¿Que sucedera?,
+        url: "https://www.dailymotion.com/embed/video/k3vxNwBabe1JYCD7rIC",
+        destacado: false,
+        fecha: "2025-05-25",
+        fechaDisponible: null,
+        portada: "img/PadreGolf.png",
         views: 0,
         esNuevo: true
     }
