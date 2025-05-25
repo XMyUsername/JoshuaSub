@@ -303,13 +303,83 @@ body {
     z-index: 10;
 }
 
-.badge-new {
-    background: var(--new-badge);
-    color: var(--text-color);
+.episode-badge.badge-featured {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.badge-featured {
-    background: var(--featured-badge);
+/* Badge Nuevo - Verde */
+.episode-badge.badge-new {
+    background: linear-gradient(135deg, #32CD32, #00FF7F);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+/* Badge Especial - Naranja/Rojo */
+.episode-badge.badge-special {
+    background: linear-gradient(135deg, #FF6B35, #FF4500);
+    color: white;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Badge Completo - Azul */
+.episode-badge.badge-complete {
+    background: linear-gradient(135deg, #4169E1, #1E90FF);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Badge Antiguo/Clásico - Marrón */
+.episode-badge.badge-old {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    font-style: italic;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Badge por defecto */
+.episode-badge.badge-default {
+    background: linear-gradient(135deg, #666, #888);
+    color: white;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); }
+    to { box-shadow: 0 0 20px rgba(255, 107, 53, 0.8); }
+}
+
+/* Filtros hover mejorados */
+.filter-btn[data-filter="destacado"]:hover {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+}
+
+.filter-btn[data-filter="nuevo"]:hover {
+    background: linear-gradient(135deg, #32CD32, #00FF7F);
+    color: white;
+}
+
+.filter-btn[data-filter="especial"]:hover {
+    background: linear-gradient(135deg, #FF6B35, #FF4500);
+    color: white;
+}
+
+.filter-btn[data-filter="completo"]:hover {
+    background: linear-gradient(135deg, #4169E1, #1E90FF);
+    color: white;
+}
+
+.filter-btn[data-filter="antiguo"]:hover {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
 }
 
 .episode-content {
