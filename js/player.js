@@ -86,12 +86,12 @@ class VideoPlayer {
                 id="mainVideoFrame"
                 src="${episode.url}?autoplay=1" 
                 frameborder="0" 
-                allowfullscreen 
-                allow="autoplay; fullscreen">
+                allowfullscreen
+                allow="autoplay; fullscreen; encrypted-media">
             </iframe>
         `;
     }
-
+    
     renderEpisodeInfo(episode) {
         const episodeTitle = document.querySelector('.episode-title');
         const episodeMeta = document.querySelector('.episode-meta');
