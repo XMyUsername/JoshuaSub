@@ -15,7 +15,6 @@
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
-    min-height: 180px; /* Altura mínima para tu banner */
 }
 
 .promo-banner {
@@ -24,21 +23,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 0; /* Eliminamos el padding */
     animation: bannerFloat 6s ease-in-out infinite;
 }
 
 .promo-banner img {
     width: 100%;
-    max-width: 1200px; /* Tamaño máximo para desktop */
     height: auto;
-    min-height: 120px; /* Altura mínima */
-    max-height: 180px; /* Altura máxima */
-    border-radius: 15px;
+    border-radius: 0; /* Eliminamos el borde redondeado para usar todo el ancho */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     animation: bannerPulse 4s ease-in-out infinite;
-    object-fit: contain; /* Mantiene la proporción sin distorsionar */
+    object-fit: cover; /* Cambiamos a cover para que llene todo el espacio */
+    max-height: none; /* Eliminamos la altura máxima */
+    min-height: auto; /* Ajustamos la altura mínima */
 }
 
 .promo-banner img:hover {
