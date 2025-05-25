@@ -69,14 +69,6 @@
     border-radius: var(--player-radius);
 }
 
-.video-player:has(iframe) ::before {
-    display: none;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
 
 /* Controles personalizados sobre el iframe */
 /*
