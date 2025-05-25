@@ -2338,4 +2338,155 @@ html {
     }
 }
 
+
+/* Estilos para la navegación de listas */
+.lista-navigation {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lista-navigation h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.lista-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.lista-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.lista-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.lista-btn.active {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+}
+
+/* Estilos para los contenedores de listas */
+.episodes-lists {
+    margin: 2rem 0;
+}
+
+.episode-list-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.episode-list-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-title {
+    color: #fff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.list-icon {
+    font-size: 1.2rem;
+}
+
+.episode-count {
+    font-size: 0.9rem;
+    color: #ccc;
+    font-weight: 400;
+}
+
+.list-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .lista-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .lista-btn {
+        justify-content: center;
+        padding: 1rem;
+    }
+    
+    .list-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .list-title {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+
+/* Animaciones suaves para las transiciones */
+.episodes-grid {
+    transition: all 0.3s ease;
+}
+
+/* Estados colapsados */
+.episodes-grid[style*="display: none"] {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
 @import url('css/bottom-navigation.css');
