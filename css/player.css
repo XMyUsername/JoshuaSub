@@ -42,6 +42,12 @@
     border-radius: var(--player-radius);
     overflow: hidden;
     box-shadow: var(--player-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-player-wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .video-player {
@@ -50,6 +56,7 @@
     height: 0;
     padding-bottom: 56.25%; /* 16:9 */
     background: #000;
+    border-radius: var(--player-radius);
 }
 
 .video-player iframe {
@@ -59,6 +66,31 @@
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: var(--player-radius);
+}
+
+.video-player::before {
+    content: '🎬 Cargando reproductor...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.1rem;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    animation: pulse 2s infinite;
+}
+
+.video-player:has(iframe) ::before {
+    display: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 /* Controles personalizados sobre el iframe */
