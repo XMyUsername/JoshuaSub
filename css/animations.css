@@ -12,38 +12,38 @@
     margin: 0;
     padding: 0;
     position: relative;
-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    height: auto; /* Altura automática basada en contenido */
     margin-top: 80px; /* Espacio para el header */
+    /* Quitamos el gradiente de fondo para que no se vea a los lados */
+    background: none;
 }
 
 .promo-banner {
     width: 100%;
-    padding-top: 8.3%; /* Proporción basada en 1641x136 (8.3% es aproximadamente la proporción de altura/ancho) */
+    height: 136px; /* Altura base */
     background-image: url('../img/Shinchan_Cadafindesemana.png');
-    background-size: cover; /* Cubre todo el espacio */
+    background-size: 100% 100%; /* Estira la imagen para cubrir todo el espacio */
     background-position: center;
     background-repeat: no-repeat;
     animation: bannerFloat 6s ease-in-out infinite;
 }
 
-.promo-banner img {
-    width: 100%;
-    height: auto;
-    display: block; /* Importante para eliminar espacios adicionales */
-    border-radius: 0;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    animation: bannerPulse 4s ease-in-out infinite;
-    /* Eliminamos object-fit para dejar que la imagen se ajuste naturalmente */
+/* Media queries para altura responsiva */
+@media (min-width: 1024px) {
+    .promo-banner {
+        height: 180px;
+    }
 }
 
-.promo-banner img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    filter: brightness(1.1);
+@media (max-width: 767px) {
+    .promo-banner {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-banner {
+        height: 80px;
+    }
 }
 
 /* Animación de gradiente de fondo */
@@ -68,24 +68,6 @@
     50% { 
         filter: brightness(1.05) saturate(1.1);
         transform: scale(1.01);
-    }
-}
-
-@media (min-width: 1024px) {
-    .promo-banner {
-        height: 180px;
-    }
-}
-
-@media (max-width: 767px) {
-    .promo-banner {
-        height: 100px;
-    }
-}
-
-@media (max-width: 480px) {
-    .promo-banner {
-        height: 80px;
     }
 }
 
