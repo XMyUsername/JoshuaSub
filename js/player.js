@@ -1,5 +1,5 @@
 /* ========================================
-   🎬 VIDEO PLAYER CONTROLLER
+   🎬 VIDEO PLAYER CONTROLLER - VERSION LIMPIA
    ======================================== */
 
 class VideoPlayer {
@@ -23,7 +23,6 @@ class VideoPlayer {
         if (episodeId) {
             this.loadEpisode(parseInt(episodeId));
         } else {
-            // Cargar el primer episodio disponible
             this.loadFirstAvailableEpisode();
         }
     }
@@ -58,22 +57,13 @@ class VideoPlayer {
         this.updateSidebar();
         this.incrementViews(episodeId);
         
-        // Actualizar título de la página
         document.title = `${episode.titulo} - JoshuaSubs`;
     }
 
     renderEpisode() {
         if (!this.currentEpisode) return;
-
-        const episode = this.currentEpisode;
-        
-        // Renderizar el video
-        this.renderVideoPlayer(episode);
-        
-        // Renderizar información del episodio
-        this.renderEpisodeInfo(episode);
-        
-        // Actualizar controles de navegación
+        this.renderVideoPlayer(this.currentEpisode);
+        this.renderEpisodeInfo(this.currentEpisode);
         this.updateNavigationControls();
     }
 
@@ -91,7 +81,7 @@ class VideoPlayer {
             </iframe>
         `;
     }
-    
+
     renderEpisodeInfo(episode) {
         const episodeTitle = document.querySelector('.episode-title');
         const episodeMeta = document.querySelector('.episode-meta');
@@ -126,7 +116,6 @@ class VideoPlayer {
             episodeDescription.textContent = episode.descripcion;
         }
 
-        // Actualizar likes/dislikes
         this.updateLikesDisplay(episode.id);
     }
 
@@ -139,16 +128,14 @@ class VideoPlayer {
         const episodesList = document.querySelector('.episodes-list');
         if (!episodesList || this.episodesList.length === 0) return;
 
-        episodesList.innerHTML = this.episodesList.map((episode, index) => {
+        episodesList.innerHTML = this.episodesList.map((episode) => {
             const isCurrentEpisode = this.currentEpisode && episode.id === this.currentEpisode.id;
             
             return `
                 <div class="episode-item ${isCurrentEpisode ? 'current' : ''}" 
                      data-episode-id="${episode.id}"
                      onclick="player.loadEpisode(${episode.id})">
-                    <div class="episode-thumbnail">
-                        EP${episode.id}
-                    </div>
+                    <div class="episode-thumbnail">EP${episode.id}</div>
                     <div class="episode-item-info">
                         <div class="episode-item-title">${episode.titulo}</div>
                         <div class="episode-item-meta">
@@ -160,7 +147,6 @@ class VideoPlayer {
             `;
         }).join('');
 
-        // Actualizar contador en sidebar
         const sidebarTitle = document.querySelector('.sidebar-title');
         if (sidebarTitle) {
             sidebarTitle.textContent = `📺 Episodios (${this.episodesList.length})`;
@@ -168,13 +154,11 @@ class VideoPlayer {
     }
 
     updateSidebar() {
-        // Actualizar clase current en sidebar
         document.querySelectorAll('.episode-item').forEach(item => {
             const episodeId = parseInt(item.dataset.episodeId);
             item.classList.toggle('current', episodeId === this.currentEpisode?.id);
         });
 
-        // Scroll al episodio actual
         const currentItem = document.querySelector('.episode-item.current');
         if (currentItem) {
             currentItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -195,16 +179,10 @@ class VideoPlayer {
             
             if (hasPrev) {
                 const prevEpisode = this.episodesList[this.currentIndex - 1];
-                prevBtn.innerHTML = `
-                    <i class="fas fa-chevron-left"></i>
-                    <span>EP${prevEpisode.id}</span>
-                `;
+                prevBtn.innerHTML = `<i class="fas fa-chevron-left"></i><span>EP${prevEpisode.id}</span>`;
                 prevBtn.onclick = () => this.loadEpisode(prevEpisode.id);
             } else {
-                prevBtn.innerHTML = `
-                    <i class="fas fa-chevron-left"></i>
-                    <span>Anterior</span>
-                `;
+                prevBtn.innerHTML = `<i class="fas fa-chevron-left"></i><span>Anterior</span>`;
             }
         }
 
@@ -214,16 +192,10 @@ class VideoPlayer {
             
             if (hasNext) {
                 const nextEpisode = this.episodesList[this.currentIndex + 1];
-                nextBtn.innerHTML = `
-                    <span>EP${nextEpisode.id}</span>
-                    <i class="fas fa-chevron-right"></i>
-                `;
+                nextBtn.innerHTML = `<span>EP${nextEpisode.id}</span><i class="fas fa-chevron-right"></i>`;
                 nextBtn.onclick = () => this.loadEpisode(nextEpisode.id);
             } else {
-                nextBtn.innerHTML = `
-                    <span>Siguiente</span>
-                    <i class="fas fa-chevron-right"></i>
-                `;
+                nextBtn.innerHTML = `<span>Siguiente</span><i class="fas fa-chevron-right"></i>`;
             }
         }
     }
@@ -235,14 +207,12 @@ class VideoPlayer {
     }
 
     setupEventListeners() {
-        // Manejar navegación del historial
         window.addEventListener('popstate', (event) => {
             if (event.state && event.state.episodeId) {
                 this.loadEpisode(event.state.episodeId);
             }
         });
 
-        // Atajos de teclado
         document.addEventListener('keydown', (event) => {
             switch(event.key) {
                 case 'ArrowLeft':
@@ -259,7 +229,6 @@ class VideoPlayer {
             }
         });
 
-        // Prevenir cierre accidental
         window.addEventListener('beforeunload', () => {
             const iframe = document.getElementById('mainVideoFrame');
             if (iframe) {
@@ -286,7 +255,6 @@ class VideoPlayer {
         window.history.back();
     }
 
-    // Métodos de interacción
     toggleLike(episodeId) {
         toggleLike(episodeId);
         this.updateLikesDisplay(episodeId);
@@ -297,11 +265,8 @@ class VideoPlayer {
         this.updateLikesDisplay(episodeId);
     }
 
-    shareEpisodePlayer(episodeId) {
-        if (player && player.currentEpisode) {
-           // Usar la función de episodios.js que ya tiene el manejo de errores
-           shareEpisode(episodeId);
-      }
+    shareEpisode(episodeId) {
+        shareEpisode(episodeId);
     }
 
     updateLikesDisplay(episodeId) {
@@ -324,7 +289,6 @@ class VideoPlayer {
         incrementViews(episodeId);
     }
 
-    // Mensajes de error
     showEpisodeNotFound() {
         const videoPlayer = document.querySelector('.video-player');
         if (videoPlayer) {
@@ -380,7 +344,7 @@ class VideoPlayer {
     }
 }
 
-// Inicializar el reproductor cuando se carga la página
+// Inicialización
 let player;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -388,21 +352,21 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🎬 Video Player inicializado');
 });
 
-// Funciones globales para compatibilidad
+// Funciones globales
 function toggleLikePlayer(episodeId) {
-    if (player) {
+    if (player && player.currentEpisode) {
         player.toggleLike(episodeId);
     }
 }
 
 function toggleDislikePlayer(episodeId) {
-    if (player) {
+    if (player && player.currentEpisode) {
         player.toggleDislike(episodeId);
     }
 }
 
 function shareEpisodePlayer(episodeId) {
-    if (player) {
-        player.shareEpisode(episodeId);
+    if (player && player.currentEpisode) {
+        shareEpisode(episodeId);
     }
 }
