@@ -35,7 +35,7 @@
     <section class="page-header">
         <div class="container">
             <h1>🎬 Todos los Episodios</h1>
-            <p>Explora nuestra colección completa de episodios subtitulados</p>
+            <p>Explora nuestra colección completa de episodios subtitulados organizados por listas</p>
         </div>
     </section>
 
@@ -58,17 +58,21 @@
         </div>
     </section>
 
-    <!-- Episodes Catalog -->
-    <section class="episodes-catalog">
+    <!-- Lista Navigation -->
+    <section class="lista-navigation">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">📚 Catálogo Completo</h2>
-                <button class="section-refresh-btn" onclick="refreshSection('all')" title="Actualizar catálogo">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
+            <h3>🎯 Navegación por Listas</h3>
+            <div class="lista-buttons" id="listaButtons">
+                <!-- Los botones de lista se generarán dinámicamente -->
             </div>
-            <div class="episodes-grid" id="allEpisodes">
-                <!-- Los episodios se cargarán aquí -->
+        </div>
+    </section>
+
+    <!-- Episodes Lists -->
+    <section class="episodes-lists">
+        <div class="container">
+            <div id="episodesContainer">
+                <!-- Las listas de episodios se cargarán aquí -->
             </div>
         </div>
     </section>
