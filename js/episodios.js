@@ -185,11 +185,11 @@ const episodios = [
         id: 16,
         titulo: "¡Masao tiene un calentador de suelo en casa! - 2 Episodios",
         descripcion: "Shin-Chan y sus amigos kazama, nene y bo-chan esperan en el parque a masao. pero como hace mucho frio shin chan decidio ir a por masao-kun en su casa, donde descrube que este tiene un calentador de piso. ¿Que sucedera?",
-        url: "https://www.dailymotion.com/embed/video/k6lKYiNYD9pAy7D7alE",
+        url: "https://www.dailymotion.com/embed/video/k42ZQhXLQPdDvjD7aIM",
         destacado: false,
         fecha: "2025-05-25",
         fechaDisponible: null,
-        portada: "img/Episodio968Completo.png",
+        portada: "img/MasaoTieneUnCalentador.png",
         views: 0,
         esNuevo: true
     }
