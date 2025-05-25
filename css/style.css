@@ -459,19 +459,158 @@ body {
     transform: translateY(-2px);
 }
 
+/* ========================================
+   📄 PAGE HEADER CON IMAGEN DE FONDO
+   ======================================== */
+
 /* Page Header */
 .page-header {
     margin-top: 100px;
-    padding: 3rem 0;
+    padding: 4rem 0;
     text-align: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    /* Reemplazamos el gradiente por la imagen */
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+        url('../img/background_episodes_page.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
 }
 
 .page-header h1 {
     font-family: 'Baloo 2', cursive;
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.page-header h1 {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.page-header p {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   📱 RESPONSIVE PARA PAGE HEADER
+   ======================================== */
+
+@media screen and (max-width: 768px) {
+    .page-header {
+        padding: 3rem 0;
+        background-attachment: scroll; /* Mejor rendimiento en móviles */
+    }
+    
+    .page-header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .page-header {
+        padding: 2.5rem 0;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .page-header p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Para pantallas muy grandes */
+@media screen and (min-width: 1400px) {
+    .page-header h1 {
+        font-size: 3.5rem;
+    }
+    
+    .page-header p {
+        font-size: 1.3rem;
+    }
+}
+
+/* ========================================
+   🌙 MODO OSCURO PARA PAGE HEADER
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .page-header::before {
+        background: rgba(0, 0, 0, 0.6); /* Overlay más oscuro en modo oscuro */
+    }
+    
+    .page-header h1,
+    .page-header p {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* ========================================
+   ✨ EFECTOS ESPECIALES OPCIONALES
+   ======================================== */
+
+/* Efecto parallax sutil (opcional) */
+@media screen and (min-width: 769px) {
+    .page-header {
+        background-attachment: fixed;
+    }
+}
+
+/* Efecto de brillo en el texto (opcional) */
+.page-header h1:hover {
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.7),
+        0 0 10px rgba(255, 255, 255, 0.3);
+    transition: text-shadow 0.3s ease;
 }
 
 /* Filters */
