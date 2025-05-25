@@ -4,19 +4,33 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEpisodesPage();
     setupFilters();
     setupSort();
-    setupBottomNavigation(); // Agregar esta línea
+    setupBottomNavigation();
 });
 
 let currentFilter = 'all';
 let currentSort = 'newest';
+let currentListaIndex = null; // Nueva variable para rastrear la lista actual
+
+const EPISODES_PER_LIST = 6; // Constante para episodios por lista
 
 function initializeEpisodesPage() {
-    loadAllEpisodes();
+    loadEpisodesByLists();
+    setupListaNavigation();
     updateCounters();
 }
 
-function loadAllEpisodes() {
-    const container = document.getElementById('allEpisodes');
+// 🆕 Nueva función para organizar episodios en listas
+function organizeEpisodesIntoLists(episodes) {
+    const lists = [];
+    for (let i = 0; i < episodes.length; i += EPISODES_PER_LIST) {
+        lists.push(episodes.slice(i, i + EPISODES_PER_LIST));
+    }
+    return lists;
+}
+
+// 🆕 Nueva función para cargar episodios organizados en listas
+function loadEpisodesByLists() {
+    const container = document.getElementById('episodesContainer');
     if (!container) return;
     
     let episodes = getAllEpisodes();
@@ -27,26 +41,147 @@ function loadAllEpisodes() {
     // Aplicar ordenamiento
     episodes = sortEpisodes(episodes, currentSort);
     
+    // Organizar en listas
+    const episodeLists = organizeEpisodesIntoLists(episodes);
+    
     container.innerHTML = '';
     
-    if (episodes.length === 0) {
+    if (episodeLists.length === 0) {
         container.innerHTML = '<p class="loading">No se encontraron episodios con los filtros seleccionados</p>';
         return;
     }
     
-    episodes.forEach(episode => {
-        container.appendChild(createEpisodeCard(episode));
+    // Si se seleccionó una lista específica, mostrar solo esa
+    if (currentListaIndex !== null && episodeLists[currentListaIndex]) {
+        renderSingleList(episodeLists[currentListaIndex], currentListaIndex + 1, container);
+    } else {
+        // Mostrar todas las listas
+        episodeLists.forEach((list, index) => {
+            renderSingleList(list, index + 1, container);
+        });
+    }
+    
+    // Actualizar navegación de listas
+    updateListaNavigation(episodeLists.length);
+}
+
+// 🆕 Nueva función para renderizar una lista individual
+function renderSingleList(episodeList, listNumber, container) {
+    const listContainer = document.createElement('div');
+    listContainer.className = 'episode-list-container';
+    listContainer.id = `lista-${listNumber}`;
+    
+    const listHeader = document.createElement('div');
+    listHeader.className = 'list-header';
+    listHeader.innerHTML = `
+        <h2 class="list-title">
+            <span class="list-icon">📋</span>
+            Lista ${listNumber}
+            <span class="episode-count">(${episodeList.length} episodios)</span>
+        </h2>
+        <button class="list-toggle-btn" onclick="toggleList(${listNumber})" data-list="${listNumber}">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    `;
+    
+    const episodesGrid = document.createElement('div');
+    episodesGrid.className = 'episodes-grid';
+    episodesGrid.id = `episodes-grid-${listNumber}`;
+    
+    episodeList.forEach(episode => {
+        episodesGrid.appendChild(createEpisodeCard(episode));
     });
+    
+    listContainer.appendChild(listHeader);
+    listContainer.appendChild(episodesGrid);
+    container.appendChild(listContainer);
     
     // Activar animaciones
     setTimeout(() => {
-        container.querySelectorAll('.episode-card').forEach((card, index) => {
+        episodesGrid.querySelectorAll('.episode-card').forEach((card, index) => {
             setTimeout(() => {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
             }, index * 100);
         });
     }, 100);
+}
+
+// 🆕 Nueva función para configurar la navegación de listas
+function setupListaNavigation() {
+    // Esta función se llama desde updateListaNavigation
+}
+
+// 🆕 Nueva función para actualizar la navegación de listas
+function updateListaNavigation(totalLists) {
+    const listaButtons = document.getElementById('listaButtons');
+    if (!listaButtons) return;
+    
+    listaButtons.innerHTML = '';
+    
+    // Botón para mostrar todas las listas
+    const allButton = document.createElement('button');
+    allButton.className = `lista-btn ${currentListaIndex === null ? 'active' : ''}`;
+    allButton.innerHTML = '<i class="fas fa-list"></i> Todas las Listas';
+    allButton.onclick = () => showAllLists();
+    listaButtons.appendChild(allButton);
+    
+    // Botones para cada lista individual
+    for (let i = 0; i < totalLists; i++) {
+        const button = document.createElement('button');
+        button.className = `lista-btn ${currentListaIndex === i ? 'active' : ''}`;
+        button.innerHTML = `<i class="fas fa-folder"></i> Lista ${i + 1}`;
+        button.onclick = () => showSpecificList(i);
+        listaButtons.appendChild(button);
+    }
+}
+
+// 🆕 Nueva función para mostrar todas las listas
+function showAllLists() {
+    currentListaIndex = null;
+    loadEpisodesByLists();
+    
+    // Actualizar botones activos
+    document.querySelectorAll('.lista-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('.lista-btn').classList.add('active');
+}
+
+// 🆕 Nueva función para mostrar una lista específica
+function showSpecificList(index) {
+    currentListaIndex = index;
+    loadEpisodesByLists();
+    
+    // Actualizar botones activos
+    document.querySelectorAll('.lista-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.lista-btn')[index + 1].classList.add('active');
+    
+    // Scroll suave hacia la lista
+    setTimeout(() => {
+        const listElement = document.getElementById(`lista-${index + 1}`);
+        if (listElement) {
+            listElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 300);
+}
+
+// 🆕 Nueva función para colapsar/expandir listas
+function toggleList(listNumber) {
+    const grid = document.getElementById(`episodes-grid-${listNumber}`);
+    const toggleBtn = document.querySelector(`[data-list="${listNumber}"]`);
+    
+    if (grid && toggleBtn) {
+        const isCollapsed = grid.style.display === 'none';
+        
+        if (isCollapsed) {
+            grid.style.display = 'grid';
+            toggleBtn.querySelector('i').className = 'fas fa-chevron-down';
+            toggleBtn.setAttribute('title', 'Colapsar lista');
+        } else {
+            grid.style.display = 'none';
+            toggleBtn.querySelector('i').className = 'fas fa-chevron-right';
+            toggleBtn.setAttribute('title', 'Expandir lista');
+        }
+    }
 }
 
 function filterEpisodes(episodes, filter) {
@@ -86,8 +221,11 @@ function setupFilters() {
             // Actualizar filtro actual
             currentFilter = this.dataset.filter;
             
+            // Resetear lista actual al cambiar filtro
+            currentListaIndex = null;
+            
             // Recargar episodios
-            loadAllEpisodes();
+            loadEpisodesByLists();
         });
     });
 }
@@ -98,7 +236,11 @@ function setupSort() {
     if (sortSelect) {
         sortSelect.addEventListener('change', function() {
             currentSort = this.value;
-            loadAllEpisodes();
+            
+            // Resetear lista actual al cambiar ordenamiento
+            currentListaIndex = null;
+            
+            loadEpisodesByLists();
         });
     }
 }
@@ -225,7 +367,7 @@ function closeModal() {
     
     // Actualizar contadores en las tarjetas
     setTimeout(() => {
-        loadAllEpisodes();
+        loadEpisodesByLists();
     }, 500);
 }
 
