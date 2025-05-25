@@ -429,29 +429,70 @@ function getAllEpisodes() {
     return episodios;
 }
 
-// Función para obtener episodios destacados
-function getFeaturedEpisodes() {
-    return episodios.filter(ep => ep.destacado);
+function getEpisodesByTag(tag) {
+    return episodios.filter(ep => ep.tag === tag);
 }
 
-// 🆕 NUEVA: Función para obtener SOLO episodios nuevos (máximo 5)
+// Función para obtener episodios destacados
+function getFeaturedEpisodes() {
+    return episodios.filter(ep => ep.tag === 'destacado');
+}
+
 function getNewEpisodes() {
-    const newEpisodes = episodios
-        .filter(ep => ep.esNuevo) // Solo episodios marcados como nuevos
-        .sort((a, b) => {
-            // Ordenar por fecha de disponibilidad, luego por fecha regular
-            const dateA = new Date(a.fechaDisponible || a.fecha);
-            const dateB = new Date(b.fechaDisponible || b.fecha);
-            return dateB - dateA;
-        })
-        .slice(0, 5); // Máximo 5 episodios
-    
-    return newEpisodes;
+    return episodios.filter(ep => ep.tag === 'nuevo').slice(0, 5);
 }
 
 // Función para obtener episodio por ID
 function getEpisodeById(id) {
     return episodios.find(ep => ep.id === id);
+}
+
+function getSpecialEpisodes() {
+    return episodios.filter(ep => ep.tag === 'especial');
+}
+
+function getCompleteEpisodes() {
+    return episodios.filter(ep => ep.tag === 'completo');
+}
+
+function getOldEpisodes() {
+    return episodios.filter(ep => ep.tag === 'antiguo');
+}
+
+function getTagInfo(tag) {
+    const tagConfig = {
+        'destacado': {
+            label: '⭐ Destacado',
+            className: 'badge-featured',
+            color: '#FFD700'
+        },
+        'nuevo': {
+            label: '🆕 Nuevo',
+            className: 'badge-new',
+            color: '#32CD32'
+        },
+        'especial': {
+            label: '🎯 Especial',
+            className: 'badge-special',
+            color: '#FF6B35'
+        },
+        'completo': {
+            label: '✅ Completo',
+            className: 'badge-complete',
+            color: '#4169E1'
+        },
+        'antiguo': {
+            label: '📜 Clásico',
+            className: 'badge-old',
+            color: '#8B4513'
+        }
+    };
+    
+    return tagConfig[tag] || {
+        label: tag,
+        className: 'badge-default',
+        color: '#666'
+    };
 }
 
 // Función para formatear fecha normal
