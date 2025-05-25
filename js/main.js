@@ -184,99 +184,32 @@ function updateCounters() {
 }
 
 function openEpisodeModal(episodeId) {
+    // Ahora redirige al reproductor en lugar de abrir modal
+    playEpisode(episodeId);
+}
+
+function playEpisode(episodeId) {
+    // Verificar si el episodio existe y está disponible
     const episode = getEpisodeById(episodeId);
-    if (!episode) return;
+    if (!episode) {
+        showToast('❌ Episodio no encontrado', 'error');
+        return;
+    }
     
-    // Verificar si está disponible
     if (!isEpisodeAvailable(episode)) {
         showNotAvailableMessage();
         return;
     }
     
-    const modal = document.getElementById('videoModal');
-    const modalContent = modal.querySelector('.modal-content');
-    
-    // Crear contenido del modal estilo YouTube
-    modalContent.innerHTML = `
-        <div class="modal-header">
-            <h3>${episode.titulo}</h3>
-            <button class="close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="video-container">
-                <iframe id="videoFrame" src="${episode.url}?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <div class="video-info">
-                <h2 class="video-title">${episode.titulo}</h2>
-                <div class="video-stats">
-                    <div class="video-views" id="modalViews" data-episode-id="${episode.id}">
-                        ${episode.views.toLocaleString()} visualizaciones • ${formatDate(episode.fecha)}
-                    </div>
-                    <div class="video-actions">
-                        <button class="action-btn like-btn" id="likeBtn" onclick="toggleLike(${episode.id})">
-                            <i class="fas fa-thumbs-up"></i>
-                            <span id="likeCount">0</span>
-                        </button>
-                        <button class="action-btn dislike-btn" id="dislikeBtn" onclick="toggleDislike(${episode.id})">
-                            <i class="fas fa-thumbs-down"></i>
-                            <span id="dislikeCount">0</span>
-                        </button>
-                        <button class="action-btn share-btn" onclick="shareEpisode(${episode.id})">
-                            <i class="fas fa-share"></i>
-                            Compartir
-                        </button>
-                    </div>
-                </div>
-                <div class="video-description">
-                    <h4>Descripción</h4>
-                    <p>${episode.descripcion}</p>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    modal.style.display = 'block';
-    document.body.classList.add('modal-open');
-    
-    // Incrementar contador de vistas
+    // Incrementar vistas antes de navegar
     incrementViews(episodeId);
     
-    // Actualizar likes/dislikes
-    updateLikesDisplay(episodeId);
-    
-    // Prevenir scroll del body
-    document.body.style.overflow = 'hidden';
+    // Navegar al reproductor con el episodio específico
+    window.location.href = `reproductor.html?id=${episodeId}`;
 }
 
-function closeModal() {
-    const modal = document.getElementById('videoModal');
-    const videoFrame = document.getElementById('videoFrame');
-    
-    // Detener completamente el video
-    if (videoFrame) {
-        videoFrame.src = 'about:blank';
-        
-        setTimeout(() => {
-            const videoContainer = videoFrame.parentElement;
-            if (videoContainer) {
-                videoContainer.innerHTML = '<div style="height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">Video detenido</div>';
-            }
-        }, 100);
-    }
-    
-    modal.style.display = 'none';
-    document.body.classList.remove('modal-open');
-    
-    // Restaurar scroll del body
-    document.body.style.overflow = 'auto';
-    
-    // Actualizar contadores en las tarjetas
-    setTimeout(() => {
-        loadFeaturedEpisodes();
-        loadNewEpisodes();
-    }, 500);
+function playEpisodeModal(episodeId) {
+    playEpisode(episodeId);
 }
 
 // ========================================
