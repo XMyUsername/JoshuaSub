@@ -62,6 +62,7 @@
 }
 
 /* Controles personalizados sobre el iframe */
+/*
 .video-overlay {
     position: absolute;
     top: 0;
@@ -112,7 +113,8 @@
 
 .fullscreen-btn {
     margin-left: auto;
-}
+} 
+*/
 
 /* ============ INFORMACIÓN DEL EPISODIO ============ */
 .episode-info {
