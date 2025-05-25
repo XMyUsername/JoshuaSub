@@ -53,14 +53,10 @@ function createEpisodeCard(episode) {
     const card = document.createElement('div');
     card.className = 'episode-card';
     
-    const isNew = isNewEpisode(episode.fecha);
-    let badgeHTML = '';
-    
-    if (episode.destacado) {
-        badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
-    } else if (isNew) {
-        badgeHTML = '<div class="episode-badge badge-new">🆕 Nuevo</div>';
-    }
+    // Obtener información del tag
+    const tagInfo = getTagInfo(episode.tag);
+    const badgeHTML = episode.tag ? 
+        `<div class="episode-badge ${tagInfo.className}">${tagInfo.label}</div>` : '';
     
     card.innerHTML = `
         <div class="episode-image">
@@ -89,15 +85,11 @@ function createEpisodeCard(episode) {
 function createNewEpisodeCard(episode) {
     const card = document.createElement('div');
     const isAvailable = isEpisodeAvailable(episode);
-    const timeLeft = getTimeUntilAvailable(episode);
-    const releaseInfo = formatReleaseDate(episode);
     
-    // Determinar clases CSS
     let cardClasses = 'episode-card';
     if (!isAvailable) {
         cardClasses += ' not-available';
-    } else if (episode.esNuevo) {
-        // Verificar si se liberó recientemente (últimas 24 horas)
+    } else if (episode.tag === 'nuevo') {
         if (episode.fechaDisponible) {
             const releaseDate = new Date(episode.fechaDisponible);
             const now = new Date();
@@ -113,14 +105,13 @@ function createNewEpisodeCard(episode) {
     card.className = cardClasses;
     card.setAttribute('data-episode-id', episode.id);
     
-    // Determinar badge
+    // Determinar badge basado en disponibilidad y tag
     let badgeHTML = '';
     if (!isAvailable) {
         badgeHTML = '<div class="episode-badge badge-coming-soon">⏰ Próximamente</div>';
-    } else if (episode.esNuevo) {
-        badgeHTML = '<div class="episode-badge badge-available-new">🆕 ¡Nuevo!</div>';
-    } else if (episode.destacado) {
-        badgeHTML = '<div class="episode-badge badge-featured">⭐ Destacado</div>';
+    } else if (episode.tag) {
+        const tagInfo = getTagInfo(episode.tag);
+        badgeHTML = `<div class="episode-badge ${tagInfo.className}">${tagInfo.label}</div>`;
     }
     
     // Crear overlay de countdown si no está disponible
@@ -154,7 +145,6 @@ function createNewEpisodeCard(episode) {
         <div class="episode-image">
             ${badgeHTML}
             <img src="${episode.portada}" alt="${episode.titulo}" onerror="this.style.display='none';">
-            ${countdownHTML}
         </div>
         <div class="episode-content">
             <h3 class="episode-title">${episode.titulo}</h3>
@@ -163,9 +153,9 @@ function createNewEpisodeCard(episode) {
                 <div class="episode-date">${formatDate(episode.fecha)}</div>
                 <div class="episode-views">👀 ${episode.views.toLocaleString()}</div>
             </div>
-            <button class="play-btn" onclick="${isAvailable ? `openEpisodeModal(${episode.id})` : 'showNotAvailableMessage()'}" ${!isAvailable ? 'disabled' : ''}>
-                <i class="fas fa-${isAvailable ? 'play' : 'lock'}"></i> 
-                ${isAvailable ? 'Ver Episodio' : 'No Disponible'}
+            <button class="play-btn ${!isAvailable ? 'disabled' : ''}" 
+                    onclick="${isAvailable ? `openEpisodeModal(${episode.id})` : 'void(0)'}">
+                <i class="fas fa-play"></i> ${isAvailable ? 'Ver Episodio' : 'Próximamente'}
             </button>
         </div>
     `;
