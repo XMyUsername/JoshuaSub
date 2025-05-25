@@ -3,7 +3,7 @@
    =================================== */
 
 /* ===================================
-   🎪 ANIMACIONES DEL BANNER - OPTIMIZADO PARA 1641x136
+   🎪 ANIMACIONES DEL BANNER - ADAPTACIÓN COMPLETA
    =================================== */
 
 .promo-banner-container {
@@ -15,28 +15,28 @@
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
+    height: auto; /* Altura automática basada en contenido */
+    margin-top: 80px; /* Espacio para el header */
 }
 
 .promo-banner {
     width: 100%;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* Eliminamos el padding */
+    display: block; /* Cambiamos a block */
+    padding: 0;
     animation: bannerFloat 6s ease-in-out infinite;
+    line-height: 0; /* Elimina espacios extra debajo de la imagen */
 }
 
 .promo-banner img {
     width: 100%;
     height: auto;
-    border-radius: 0; /* Eliminamos el borde redondeado para usar todo el ancho */
+    display: block; /* Importante para eliminar espacios adicionales */
+    border-radius: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     animation: bannerPulse 4s ease-in-out infinite;
-    object-fit: cover; /* Cambiamos a cover para que llene todo el espacio */
-    max-height: none; /* Eliminamos la altura máxima */
-    min-height: auto; /* Ajustamos la altura mínima */
+    /* Eliminamos object-fit para dejar que la imagen se ajuste naturalmente */
 }
 
 .promo-banner img:hover {
