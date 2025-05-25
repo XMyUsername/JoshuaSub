@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor - JoshuaSubs</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/player.css">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <meta name="description" content="Disfruta de los episodios de Shin Chan con subtítulos en español de alta calidad">
+    <meta name="keywords" content="Shin Chan, episodios, subtítulos, español, anime">
+</head>
+<body>
+    <!-- Header Limpio -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🎌</div>
+                    <div class="logo-text">
+                        <h1>JoshuaSubs</h1>
+                        <div class="tagline">Shin Chan en Español</div>
+                    </div>
+                </a>
+                
+                <!-- Navegación Desktop -->
+                <ul class="nav-menu desktop-only">
+                    <li><a href="index.html" class="nav-link">🏠 Inicio</a></li>
+                    <li><a href="episodios.html" class="nav-link">🎬 Episodios</a></li>
+                    <li><a href="acerca.html" class="nav-link">👤 Acerca</a></li>
+                </ul>
+                
+                <!-- Botón móvil -->
+                <button class="mobile-menu-btn mobile-only">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Página del Reproductor -->
+    <main class="player-page">
+        <div class="player-container">
+            <!-- Área principal del video -->
+            <section class="video-main">
+                <!-- Reproductor de video -->
+                <div class="video-player-wrapper">
+                    <div class="video-player">
+                        <!-- El iframe se carga dinámicamente -->
+                    </div>
+                    <div class="video-overlay">
+                        <div class="video-controls">
+                            <button class="control-btn play-pause-btn" title="Play/Pausa">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="control-btn volume-btn" title="Volumen">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                            <button class="control-btn fullscreen-btn" title="Pantalla completa">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información del episodio -->
+                <div class="episode-info">
+                    <h1 class="episode-title">Cargando episodio...</h1>
+                    
+                    <div class="episode-meta">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+
+                    <!-- Acciones del episodio -->
+                    <div class="episode-actions">
+                        <button class="action-btn like-btn" id="likeBtn" onclick="toggleLikePlayer(player.currentEpisode?.id)">
+                            <i class="fas fa-thumbs-up"></i>
+                            <span id="likeCount">0</span>
+                        </button>
+                        <button class="action-btn dislike-btn" id="dislikeBtn" onclick="toggleDislikePlayer(player.currentEpisode?.id)">
+                            <i class="fas fa-thumbs-down"></i>
+                            <span id="dislikeCount">0</span>
+                        </button>
+                        <button class="action-btn share-btn" onclick="shareEpisodePlayer(player.currentEpisode?.id)">
+                            <i class="fas fa-share"></i>
+                            Compartir
+                        </button>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="episode-description">
+                        <h4>📝 Descripción del Episodio</h4>
+                        <p>Cargando descripción...</p>
+                    </div>
+
+                    <!-- Navegación entre episodios -->
+                    <div class="episode-navigation">
+                        <button class="nav-episode-btn prev-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                            <span>Anterior</span>
+                        </button>
+                        <button class="nav-episode-btn next-btn" disabled>
+                            <span>Siguiente</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sidebar de episodios -->
+            <aside class="episodes-sidebar">
+                <div class="sidebar-header">
+                    <h3 class="sidebar-title">📺 Episodios</h3>
+                    <button class="control-btn" onclick="window.location.href='episodios.html'" title="Ver todos">
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+                </div>
+                <div class="episodes-list">
+                    <!-- Los episodios se cargan dinámicamente -->
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Navegación móvil -->
+    <nav class="bottom-nav mobile-only">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="episodios.html" class="bottom-nav-item">
+            <i class="fas fa-film"></i>
+            <span>Episodios</span>
+        </a>
+        <a href="reproductor.html" class="bottom-nav-item active">
+            <i class="fas fa-play"></i>
+            <span>Reproductor</span>
+        </a>
+        <a href="acerca.html" class="bottom-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Acerca</span>
+        </a>
+    </nav>
+
+    <!-- Spacer para navegación móvil -->
+    <div class="bottom-nav-spacer mobile-only"></div>
+
+    <!-- Scripts -->
+    <script src="js/episodios.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/player.js"></script>
+</body>
+</html>
