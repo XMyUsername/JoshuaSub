@@ -8,40 +8,41 @@
 
 .promo-banner-container {
     width: 100%;
-    overflow: hidden;
-    margin: 0;
+    max-width: 1641px; /* Ancho máximo del banner original */
+    margin: 0 auto;    /* Centrado horizontal */
+    margin-top: 80px;  /* Espacio para el header */
     padding: 0;
     position: relative;
-    margin-top: 80px; /* Espacio para el header */
     background: none;
-    max-height: 300px; /* Limitar altura máxima */
+    overflow: hidden;
 }
 
 .promo-banner {
     width: 100%;
-    /* Usamos padding-top con proporción en lugar de height fija */
-    /* La proporción 8.3% es aproximadamente 136px/1641px (altura/ancho) */
-    padding-top: 8.3%; 
-    min-height: 100px; /* Altura mínima para dispositivos pequeños */
+    height: 145px;     /* Altura fija como en tu imagen */
     background-image: url('../img/Shinchan_Cadafindesemana.png');
-    background-size: contain; /* Muestra la imagen completa manteniendo su proporción */
-    background-position: center;
+    background-size: contain;
+    background-position: center center;
     background-repeat: no-repeat;
     animation: bannerFloat 6s ease-in-out infinite;
 }
 
 /* Media queries para dispositivos específicos */
-@media (min-width: 1200px) {
+@media (max-width: 1200px) {
     .promo-banner {
-        padding-top: 10%; /* Ligeramente más alto para pantallas grandes */
-        min-height: 136px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 992px) {
+    .promo-banner {
+        height: 120px;
     }
 }
 
 @media (max-width: 767px) {
     .promo-banner {
-        padding-top: 15%; /* Mayor porcentaje para pantallas pequeñas */
-        min-height: 80px;
+        height: 100px;
     }
     .promo-banner-container {
         margin-top: 75px;
@@ -49,6 +50,9 @@
 }
 
 @media (max-width: 480px) {
+    .promo-banner {
+        height: 80px;
+    }
     .promo-banner-container {
         margin-top: 70px;
     }
