@@ -3,7 +3,7 @@
    =================================== */
 
 /* ===================================
-   🎪 ANIMACIONES DEL BANNER
+   🎪 ANIMACIONES DEL BANNER - OPTIMIZADO PARA 1641x136
    =================================== */
 
 .promo-banner-container {
@@ -15,6 +15,7 @@
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
+    min-height: 180px; /* Altura mínima para tu banner */
 }
 
 .promo-banner {
@@ -28,17 +29,20 @@
 }
 
 .promo-banner img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 1200px; /* Tamaño máximo para desktop */
     height: auto;
-    max-height: 200px;
+    min-height: 120px; /* Altura mínima */
+    max-height: 180px; /* Altura máxima */
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     animation: bannerPulse 4s ease-in-out infinite;
+    object-fit: contain; /* Mantiene la proporción sin distorsionar */
 }
 
 .promo-banner img:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     filter: brightness(1.1);
 }
@@ -53,7 +57,7 @@
 /* Animación de flotación del banner */
 @keyframes bannerFloat {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-5px); }
 }
 
 /* Animación de pulso sutil */
@@ -64,7 +68,73 @@
     }
     50% { 
         filter: brightness(1.05) saturate(1.1);
-        transform: scale(1.02);
+        transform: scale(1.01);
+    }
+}
+
+/* ===================================
+   📱 RESPONSIVE PARA DIFERENTES PANTALLAS
+   =================================== */
+
+/* Tablets grandes y laptops */
+@media (min-width: 1024px) {
+    .promo-banner img {
+        max-width: 1400px;
+        max-height: 200px;
+    }
+    
+    .promo-banner-container {
+        min-height: 220px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .promo-banner img {
+        max-width: 900px;
+        max-height: 150px;
+    }
+    
+    .promo-banner-container {
+        min-height: 170px;
+    }
+    
+    .promo-banner {
+        padding: 15px;
+    }
+}
+
+/* Móviles grandes */
+@media (max-width: 767px) and (min-width: 480px) {
+    .promo-banner img {
+        max-width: 100%;
+        max-height: 120px;
+        min-height: 80px;
+    }
+    
+    .promo-banner-container {
+        min-height: 140px;
+    }
+    
+    .promo-banner {
+        padding: 10px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 479px) {
+    .promo-banner img {
+        max-width: 100%;
+        max-height: 100px;
+        min-height: 60px;
+    }
+    
+    .promo-banner-container {
+        min-height: 120px;
+    }
+    
+    .promo-banner {
+        padding: 8px;
     }
 }
 
@@ -348,38 +418,6 @@
 }
 
 /* ===================================
-   📱 RESPONSIVE ANIMATIONS
-   =================================== */
-
-@media (max-width: 768px) {
-    .promo-banner {
-        padding: 15px;
-    }
-    
-    .promo-banner img {
-        max-height: 150px;
-    }
-    
-    /* Reducir animaciones en móvil para mejor rendimiento */
-    .episode-card {
-        animation-duration: 0.4s;
-    }
-    
-    .modal-content {
-        animation-duration: 0.3s;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    /* Respeta las preferencias de accesibilidad */
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* ===================================
    🎪 EFECTOS ADICIONALES
    =================================== */
 
@@ -426,5 +464,14 @@
     50% {
         opacity: 1;
         transform: translateY(-20px) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Respeta las preferencias de accesibilidad */
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
