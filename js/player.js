@@ -76,13 +76,12 @@ class VideoPlayer {
                id="mainVideoFrame"
                src="${episode.url}?autoplay=1&mute=0&quality=auto" 
                frameborder="0" 
-               allowfullscreen
-               allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                loading="lazy"
-                title="${episode.titulo}">
-            </iframe>
-        `;
-    } 
+               allow="fullscreen *; encrypted-media *; picture-in-picture *"
+               loading="lazy"
+               title="${episode.titulo}">
+           </iframe>
+       `;
+    }
 
     renderEpisodeInfo(episode) {
         const episodeTitle = document.querySelector('.episode-title');
