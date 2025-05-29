@@ -6,10 +6,15 @@
 }
 
 :root {
-    --bg-color: #FFF7E0;
-    --primary-color: #FF3B30;
-    --accent-color: #32B5FF;
-    --text-color: #333333;
+    --color-bg-main: #FFF6A5;      /* Fondo principal */
+    --color-bg-secondary: #A4D8FF; /* Fondo secundario */
+    --color-accent: #F84A4A;       /* Rojo Shin Chan */
+    --color-success: #B6FFB0;      /* Verde Pastel */
+    --color-warning: #FFA94A;      /* Naranja */
+    --color-info: #FFD6E0;         /* Rosa Pastel */
+    --color-text-main: #2E2E2E;    /* Texto principal */
+    --color-text-secondary: #B4936C; /* Texto secundario */
+    --color-border: #FFE9A5;       /* Bordes suaves */
     --new-badge: #FFD700;
     --featured-badge: #FF4500;
     --card-bg: #FFFFFF;
@@ -20,13 +25,13 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background: var(--bg-color);
+    background: var(--color-bg-main);
     background-image: url('../img/background.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     background-blend-mode: overlay;
-    color: var(--text-color);
+    color: var(--color-text-main);
     line-height: 1.6;
 }
 
