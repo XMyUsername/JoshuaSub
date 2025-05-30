@@ -6,15 +6,10 @@
 }
 
 :root {
-    --color-bg-main: #FFF6A5;      /* Fondo principal */
-    --color-bg-secondary: #A4D8FF; /* Fondo secundario */
-    --color-accent: #F84A4A;       /* Rojo Shin Chan */
-    --color-success: #B6FFB0;      /* Verde Pastel */
-    --color-warning: #FFA94A;      /* Naranja */
-    --color-info: #FFD6E0;         /* Rosa Pastel */
-    --color-text-main: #2E2E2E;    /* Texto principal */
-    --color-text-secondary: #B4936C; /* Texto secundario */
-    --color-border: #FFE9A5;       /* Bordes suaves */
+    --bg-color: #FFF7E0;
+    --primary-color: #FF3B30;
+    --accent-color: #32B5FF;
+    --text-color: #333333;
     --new-badge: #FFD700;
     --featured-badge: #FF4500;
     --card-bg: #FFFFFF;
@@ -23,17 +18,15 @@
     --transition: all 0.3s ease;
 }
 
-@import url('css/bottom-navigation.css');
-
 body {
     font-family: 'Open Sans', sans-serif;
-    background: var(--color-bg-main);
+    background: var(--bg-color);
     background-image: url('../img/background.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     background-blend-mode: overlay;
-    color: var(--color-text-main);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
@@ -132,20 +125,6 @@ body {
     background: var(--primary-color);
     margin: 3px 0;
     transition: var(--transition);
-}
-
-button, .btn, .play-btn {
-  background: var(--color-accent);
-  color: #fff;
-  border-radius: 14px;
-  border: none;
-  padding: 0.6em 1.5em;
-  font-weight: bold;
-  box-shadow: 0 2px 10px #ffd6e063;
-  transition: background 0.2s;
-}
-button:hover, .btn:hover, .play-btn:hover {
-  background: var(--color-warning);
 }
 
 /* ===================================
@@ -263,13 +242,16 @@ button:hover, .btn:hover, .play-btn:hover {
 }
 
 .episode-card {
-  background: var(--color-bg-secondary);
-  border-radius: 24px;
-  box-shadow: 0 4px 24px #a4d8ff22;
-  border: 2px solid var(--color-border);
-  padding: 1.5em;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
 }
-
 
 .episode-card:hover {
     transform: translateY(-10px);
@@ -322,24 +304,39 @@ button:hover, .btn:hover, .play-btn:hover {
 }
 
 .episode-badge.badge-featured {
-  background: var(--color-accent);
-  color: #fff;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
+/* Badge Nuevo - Verde */
 .episode-badge.badge-new {
-  background: var(--color-warning);
-  color: #fff;
+    background: linear-gradient(135deg, #32CD32, #00FF7F);
+    color: white;
+    animation: pulse 2s infinite;
 }
+
+/* Badge Especial - Naranja/Rojo */
 .episode-badge.badge-special {
-  background: var(--color-info);
-  color: var(--color-text-main);
+    background: linear-gradient(135deg, #FF6B35, #FF4500);
+    color: white;
+    animation: glow 2s ease-in-out infinite alternate;
 }
+
+/* Badge Completo - Azul */
 .episode-badge.badge-complete {
-  background: var(--color-success);
-  color: var(--color-text-main);
+    background: linear-gradient(135deg, #4169E1, #1E90FF);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
+
+/* Badge Antiguo/Clásico - Marrón */
 .episode-badge.badge-old {
-  background: #B4936C;
-  color: #fff;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    font-style: italic;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Badge por defecto */
@@ -993,10 +990,12 @@ button:hover, .btn:hover, .play-btn:hover {
 }
 
 /* Footer */
-footer {
-  background: var(--color-bg-secondary);
-  color: var(--color-text-main);
-  border-top: 4px solid var(--color-accent);
+.footer {
+    background: rgba(51, 51, 51, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
 }
 
 .footer-content {
@@ -2670,3 +2669,4 @@ html {
     height: 0;
     overflow: hidden;
 }
+@import url('css/bottom-navigation.css');
